@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    color: #C4C4C4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Definição de fonte padrão e cor */
+body {
+    font-family: Arial, sans-serif; 
+    background-color: #151515;
+    min-height: 100%;
+}
+
+/* Removendo list-style dos elementos de lista */
+ul, ol {
+    list-style: none;
+}
+
+/* Removendo decoração de link */
+a {
+    text-decoration: none;
+}
+.container__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 16px;
+    
+}
+.container__header nav{
+    display: flex;
+    gap: 10rem;
+}
+.logo{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.container__main{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.container__login{
+    width: 31.9375rem;
+    height: 25.3125rem;
+    background-color:#232624;
+    padding: 73px 100px;
+    border-radius: 8px;
+}
+
+.form__register{
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+.form__register input{
+    font-size: 1rem;
+    padding: 8px 25px;
+    background-color: #151515;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+}
+input::placeholder {
+    color: #C4C4C4;
+}
+
+button{
+    padding: 1rem;
+    color: #C4C4C4;
+    background-color: #05BE4F;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: box-shadow 0.3s; 
+}
+button:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6)
+}
