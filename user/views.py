@@ -5,6 +5,5 @@ from django.shortcuts import render
 
 def register(request):
 
-    exemplo = 'TEXTO'
 
-    return render(request,'register.html',context={'exemplo':exemplo})
+    return render(request,'register.html')
