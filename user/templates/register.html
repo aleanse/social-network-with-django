@@ -22,10 +22,9 @@
         <section class="container__login">
             <h1>Register</h1>
             <form class="form__register" action="">
-                <input type="text" placeholder="username" name="username">
-                <input type="text" name="" id="" placeholder="email" name="email">
-                <input type="password" placeholder="password" name="password">
-                <input type="password" placeholder="repeat password">
+                {% for field in form%}
+                    {{field}}
+                {% endfor %}
                 <button  type="submit">Send</button>
             </form>      
         </section>
