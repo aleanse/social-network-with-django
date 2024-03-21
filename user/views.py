@@ -6,3 +6,7 @@ from user.forms import RegisterForm
 def register(request):
     form = RegisterForm()
     return render(request,'register.html',context={'form':form})
+
+def create_register(request):
+    form = RegisterForm(request.POST)
+    return 'ola mundo'

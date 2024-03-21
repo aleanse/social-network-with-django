@@ -21,11 +21,12 @@
     <main class="container__main">
         <section class="container__login">
             <h1>Register</h1>
-            <form class="form__register" action="">
+            <form class="form__register" action="{% url 'create-register'%}" method="post">
+                {% csrf_token %}
                 {% for field in form%}
                     {{field}}
                 {% endfor %}
-                <button  type="submit">Send</button>
+                <button  type="submit" formmethod="post">Send</button>
             </form>      
         </section>
     </main>
