@@ -47,7 +47,7 @@ a {
     
 }
 
-.container__login{
+.container__register{
     width: 31.9375rem;
     height: 25.3125rem;
     background-color:#232624;
@@ -59,7 +59,7 @@ a {
     gap: 25px;
 }
 
-.container__login h1{
+.container__register h1{
     font-size: 1.7rem;
 }
 
