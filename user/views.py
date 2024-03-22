@@ -20,7 +20,7 @@ def create_register(request):
     
 
 
-def login(request):
+def login_view(request):
     form = LoginForm()
     return render(request,'login.html',context={'form':form})
 
