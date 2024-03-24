@@ -14,8 +14,9 @@ body {
 }
 
 /* Removendo list-style dos elementos de lista */
-ul, ol {
-    list-style: none;
+.messages li{
+    color: red;
+    list-style-type: none;
 }
 
 /* Removendo decoração de link */
@@ -78,6 +79,8 @@ a {
     border-radius: 6px;
     outline: none;
 }
+
+
 input::placeholder {
     color: #C4C4C4;
 }
