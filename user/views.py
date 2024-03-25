@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from user.forms import RegisterForm, LoginForm
-from django.contrib.auth import authenticate, login, logout
-from django.http import Http404
+from user.forms import RegisterForm, LoginForm, PostForm
+from django.contrib.auth import  login, logout
 from user.utils.authenticate import authenticate_by_email
 from django.contrib import messages
 
@@ -19,10 +18,9 @@ def create_register(request):
         user.set_password(user.password)
         user.save()
         return redirect('login')
+    else:
+        return render(request, 'register.html', {'form': form})
     
-
-
-
 def login_view(request):
     print('ola')
     form = LoginForm()
@@ -47,6 +45,21 @@ def create_login(request):
             messages.error(request,'Invalid credentials')
 
     return redirect('login')
+
+
+def post(request):
+    form = PostForm()
+    return render(request,'create-post.html',context={'form':form})
+
+def create_post(request):
+    form = PostForm(request.POST, request.FILES)
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.author = request.user
+        post.save()
+    else:
+        print(form.errors)
+    return redirect('home')
 
 
 @login_required(login_url='register', redirect_field_name='next')

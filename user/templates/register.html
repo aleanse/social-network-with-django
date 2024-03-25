@@ -9,10 +9,15 @@
             <h1>Register</h1>
             <form class="form__register" action="{% url 'create-register' %}" method="post">
                 {% csrf_token %}
-                {% for field in form%}
+                {% for field in form %}
                     {{field}}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <span class="form-errors">{{error}}</span>
+                        {% endfor %}
+                    {% endif %}
                 {% endfor %}
-                <button  type="submit">Send</button>
+                <button class="button-send"  type="submit">Send</button>
             </form>
         </section>
     </main>

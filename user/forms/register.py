@@ -1,11 +1,9 @@
-from typing import Any
 from django import forms
 from user.models import User
 from django.core.exceptions import ValidationError
-from django.http import Http404
 
 class RegisterForm(forms.ModelForm):
-    username = forms.CharField(required=True,widget=forms.TextInput(attrs={'placeholder':'Username'}))
+    username = forms.CharField(required=True,widget=forms.TextInput(attrs={'placeholder':'Username'}),)
     email = forms.CharField(required=True,widget=forms.TextInput(attrs={'placeholder':'Email'}))
     password = forms.CharField(required=True,widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
     password2 = forms.CharField(required=True,widget=forms.PasswordInput(attrs={'placeholder':'Repeat Password'}))
@@ -18,7 +16,7 @@ class RegisterForm(forms.ModelForm):
         data = self.cleaned_data.get('username')
         user = User.objects.filter(username=data).exists()
         if user:
-            raise Http404('username already exists')
+            raise ValidationError('username already exists',code='invalid',)
         else:
             return data
                
@@ -26,7 +24,7 @@ class RegisterForm(forms.ModelForm):
         data = self.cleaned_data.get('email')
         user = User.objects.filter(email=data).exists()
         if user:
-            raise Http404('email already exists')
+            raise ValidationError('email already exists',code='invalid',)
         else:
             return data
     def clean(self):
@@ -34,4 +32,4 @@ class RegisterForm(forms.ModelForm):
         password = cleaned_data.get('password')
         password2 = cleaned_data.get('password2')
         if password != password2:
-            raise Http404('different passwords')
+            raise ValidationError({'password':'Passwords must be equal'})
