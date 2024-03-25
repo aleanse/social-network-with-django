@@ -24,8 +24,10 @@ def create_register(request):
 
 
 def login_view(request):
+    print('ola')
     form = LoginForm()
     return render(request,'login.html',context={'form':form})
+
 
 
 
@@ -47,7 +49,11 @@ def create_login(request):
     return redirect('login')
 
 
+@login_required(login_url='register', redirect_field_name='next')
 def logout_view(request):
+    if request.GET:
+        return redirect('login')
+
     logout(request)
     messages.success(request,'logout feito com sucesso')
     return redirect('home')

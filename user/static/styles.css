@@ -14,8 +14,13 @@ body {
 }
 
 /* Removendo list-style dos elementos de lista */
-.messages li{
+ ul .message-error{
     color: red;
+    list-style-type: none;
+}
+
+ul .message-sucess{
+    color: green;
     list-style-type: none;
 }
 

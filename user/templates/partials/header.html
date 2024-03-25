@@ -4,6 +4,9 @@
         <a href="">home</a>
         <a href="">usuarios</a>
         <a href="">editar perfil</a>
-        <a href="">sair</a>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
     </nav>
 </header>
