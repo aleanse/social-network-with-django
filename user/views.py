@@ -12,10 +12,11 @@ def register(request):
     return render(request,'register.html',context={'form':form})
 
 def create_register(request):
-    form = RegisterForm(request.POST)
+    form = RegisterForm(request.POST, request.FILES)
     if form.is_valid():
         user = form.save(commit=False) #salva os dados mas ainda não manda para o banco de dados
         user.set_password(user.password)
+        user.photo = request.FILES['image']
         user.save()
         return redirect('login')
     else:
@@ -70,6 +71,11 @@ def logout_view(request):
     logout(request)
     messages.success(request,'logout feito com sucesso')
     return redirect('home')
+
+def profile(request):
+    user = request.user
+    
+    return render(request, 'profile.html',context={'user':user})
 
 
 def home(request):
