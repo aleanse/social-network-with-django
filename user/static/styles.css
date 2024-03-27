@@ -9,8 +9,8 @@
 /* Definição de fonte padrão e cor */
 body {
     font-family: Arial, sans-serif; 
-   background: linear-gradient(to bottom,#434343 0%, black 100%);
     min-height: 100%;
+    background-color: #151515;
 }
 
 /* Removendo list-style dos elementos de lista */
@@ -57,13 +57,19 @@ a {
     width: 31.9375rem;
     height: 30.3125rem;
     background-color:#232624;
-    padding: 30px 100px;
+    padding: 40px;
     border-radius: 8px;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     gap: 25px;
 }
+
+
+
+
+
 
 .container__register h1{
     font-size: 1.7rem;
@@ -72,17 +78,36 @@ a {
 .form__register{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.9rem;
 }
 
 
-.form__register input{
-    font-size: 1rem;
+
+.form__register input[type="password"]{
+    font-size: 1.2rem;
     padding: 8px 25px;
     background-color: #151515;
     border: none;
     border-radius: 6px;
     outline: none;
+}
+.form__register input[type="text"]{
+    font-size: 1.2rem;
+    padding: 8px 25px;
+    background-color: #151515;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+}
+.form__register input[type="file"]{
+    font-size: 0.9rem;
+    padding: 8px 20px;
+    background-color: #151515;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    width: 17rem;
 }
 
 .form-errors{
@@ -95,7 +120,7 @@ input::placeholder {
 }
 
 .button-send{
-    padding: 1rem;
+    padding: 1.0rem;
     color: #C4C4C4;
     background-color: #05BE4F;
     border: none;
@@ -103,7 +128,9 @@ input::placeholder {
     border-radius: 6px;
     font-weight: bold;
     font-size: 1.25rem;
+    width: 17rem;
     transition: box-shadow 0.3s; 
+    
 }
 .button-logout{
     background: none;
@@ -121,7 +148,7 @@ input::placeholder {
 
 .post{
     width: 31.9375rem;
-    height: 41rem;
+    height: 33rem;
     border: 2px solid #fffdfd79;
     border-radius: 8px;
     display: flex;
@@ -134,9 +161,6 @@ input::placeholder {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra para efeito de profundidade */
 
-
-
-    
 }
 
 .post .form-post{
@@ -150,8 +174,8 @@ input::placeholder {
 }
 
 .form-post input[type="text"]{
-    width: 300px;
-    height: 25px;
+    width: 400px;
+    height: 30px;
     background-color: transparent;
     border-bottom: 1px solid rgb(238, 227, 227);
     border-right: 0px solid #151515;
@@ -159,18 +183,21 @@ input::placeholder {
     border-top: 0px solid #151515;
     box-shadow: none;
     outline: none;
+    font-size: 1rem;
 }
-
-input[type="file"] {
+.form-post input[type="file"] {
     width: 110px; /* Largura desejada */
     height: 40px; /* Altura desejada */
 }
 
 
+
+
+
 textarea{
     resize: none;
-    width: 300px;
-    height: 100px;
+    width: 400px;
+    height: 150px;
     border-bottom: 1px solid rgb(238, 227, 227);
     border-right: 0px solid #151515;
     border-left: 0px solid #151515;

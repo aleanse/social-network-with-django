@@ -7,7 +7,7 @@ class RegisterForm(forms.ModelForm):
     username = forms.CharField(required=True,widget=forms.TextInput(attrs={'placeholder':'Username'}),)
     password = forms.CharField(required=True,widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
     password2 = forms.CharField(required=True,widget=forms.PasswordInput(attrs={'placeholder':'Repeat Password'}))
-    
+
     
 
     class Meta: # especifica o modelo e os campos do modelo que serão usados

@@ -1,5 +1,5 @@
 <header class="container__header">
-    <a class="logo" href="">AleVerse</a>
+    <a class="logo" href="{% url 'home' %}">AleVerse</a>
     <nav>
         <a href="">Users</a>
         {% if request.user.is_authenticated %}
