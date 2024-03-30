@@ -1,7 +1,7 @@
 <header class="container__header">
     <a class="logo" href="{% url 'home' %}">AleVerse</a>
     <nav>
-        <a href="">Users</a>
+        <a href="{% url 'users' %}">Users</a>
         {% if request.user.is_authenticated %}
             <a href="">Edit profile</a>
             <a href="{% url 'post' %}">Create post </a>
@@ -13,6 +13,5 @@
                 <a href="{% url 'login' %}">Login</a>
                 <a href="{% url 'register' %}">Register</a> 
         {% endif %}
-
     </nav>
 </header>

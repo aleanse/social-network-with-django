@@ -78,6 +78,12 @@ def profile(request):
     return render(request, 'profile.html',context={'user':user})
 
 
+
+def users(request):
+
+    return render(request,'users.html')
+
+
 def home(request):
     return render(request, 'home.html')
 
