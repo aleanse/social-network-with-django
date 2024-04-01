@@ -6,6 +6,10 @@
 </head>
 <body>
     {% include 'partials/header.html' %}
-    <main class="container__main">
-        {% include 'partials/user.html' %}
+    <main class="container__users">
+        {% for i in user %}
+            {% if i != request.user %}
+                {% include 'partials/user.html' %}
+            {% endif %}
+        {% endfor %}
     </main>

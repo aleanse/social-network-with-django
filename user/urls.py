@@ -13,5 +13,8 @@ urlpatterns = [
     path('post/',views.post,name='post'),
     path('post/create-post',views.create_post,name='create-post'),
     path('profile/',views.profile,name='profile'),
-    path('users/',views.users,name='users')
+    path('users/',views.users,name='users'),
+    path('users/<int:id>',views.follow,name='follow'),
+    path('edit_profile/',views.edit_profile,name='edit_profile'),
+    path('create_edit_profile/',views.create_edit_profile,name='create_edit_profile')
 ]

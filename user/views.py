@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from user.forms import RegisterForm, LoginForm, PostForm
+from user.forms import RegisterForm, LoginForm, PostForm, Edit_profileForm
 from django.contrib.auth import  login, logout
 from user.utils.authenticate import authenticate_by_email
 from django.contrib import messages
+from user.models import User, Post, Seguidor
+from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
 
@@ -16,7 +19,7 @@ def create_register(request):
     if form.is_valid():
         user = form.save(commit=False) #salva os dados mas ainda não manda para o banco de dados
         user.set_password(user.password)
-        user.photo = request.FILES['image']
+        user.photo = request.FILES
         user.save()
         return redirect('login')
     else:
@@ -79,9 +82,35 @@ def profile(request):
 
 
 
+@login_required(login_url='register', redirect_field_name='next')
 def users(request):
+    user = User.objects.all()
+    return render(request,'users.html',context={'user':user})
 
-    return render(request,'users.html')
+
+@login_required(login_url='register', redirect_field_name='next')
+def follow(request,id):
+    usuario_a_seguir = User.objects.get(id=id)
+    seguido = Seguidor.objects.get_or_create(usuario=request.user, seguindo=usuario_a_seguir)
+    return redirect('users')
+
+
+@login_required(login_url='register', redirect_field_name='next')
+def edit_profile(request):
+    form = Edit_profileForm()
+    return render(request,'edit_profile.html',context={'form':form})
+
+@login_required(login_url='register', redirect_field_name='next')
+def create_edit_profile(request):
+    instance = request.user
+    form = Edit_profileForm(request.POST,request.FILES,instance=instance)
+    if form.is_valid():
+        user = form.save(commit=False)
+        user.set_password(user.password)
+        user.save()
+    else:
+        print(form.errors)
+    return redirect('home')
 
 
 def home(request):

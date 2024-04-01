@@ -1,28 +1,21 @@
 <div class="card-container">
-	<span class="pro">PRO</span>
-	<img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-	<h3>Ricky Park</h3>
-	<h6>New York</h6>
-	<p>User interface designer and <br/> front-end developer</p>
+		<img class="round" src="{{ i.photo.url }}" alt="user" />
+	<h3>{{ i.username }}</h3>
+	
 	<div class="buttons">
-		<button class="primary">
-			Message
+		<button class="primary ghost">
+			<a class="link-seguir" href="{% url 'follow' i.id %}">Seguir</a>
 		</button>
 		<button class="primary ghost">
-			Following
+			{{ i.contar_seguidores }} Seguidores
 		</button>
+		
 	</div>
+	<button class="primary">
+		Message
+	</button>
 	<div class="skills">
-		<h6>Skills</h6>
-		<ul>
-			<li>UI / UX</li>
-			<li>Front End Development</li>
-			<li>HTML</li>
-			<li>CSS</li>
-			<li>JavaScript</li>
-			<li>React</li>
-			<li>Node</li>
-		</ul>
+	
 	</div>
 </div>
 
