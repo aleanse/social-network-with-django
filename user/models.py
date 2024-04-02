@@ -8,7 +8,7 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
     
-    photo = models.ImageField(upload_to='images/photo_profile/',default='images/default.png',blank=True,null=True)
+    photo = models.ImageField(upload_to='images/photo_profile/',default='images/default.png')
     def contar_seguidores(self):
         return Seguidor.objects.filter(seguindo=self).count()
     

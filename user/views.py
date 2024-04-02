@@ -19,7 +19,6 @@ def create_register(request):
     if form.is_valid():
         user = form.save(commit=False) #salva os dados mas ainda não manda para o banco de dados
         user.set_password(user.password)
-        user.photo = request.FILES
         user.save()
         return redirect('login')
     else:
@@ -82,7 +81,7 @@ def profile(request):
 
 
 
-@login_required(login_url='register', redirect_field_name='next')
+
 def users(request):
     user = User.objects.all()
     return render(request,'users.html',context={'user':user})
@@ -100,7 +99,7 @@ def edit_profile(request):
     form = Edit_profileForm()
     return render(request,'edit_profile.html',context={'form':form})
 
-@login_required(login_url='register', redirect_field_name='next')
+
 def create_edit_profile(request):
     instance = request.user
     form = Edit_profileForm(request.POST,request.FILES,instance=instance)

@@ -8,6 +8,7 @@ class PostForm(forms.ModelForm):
      image = forms.FileField(required=False)
 
 
+     
      class Meta: # especifica o modelo e os campos do modelo que serão usados
         model = Post
         fields = ['title','text_post','image']
