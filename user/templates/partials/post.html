@@ -1,0 +1,18 @@
+<div class="card">
+        <div class="card__header">
+        <img src="{{ post.image.url }}" alt="card__image" class="card__image" width="600">
+        </div>
+        <div class="card__body">
+        <h4>{{ post.title }}</h4>
+        <p>{{ post.text_post }}</p>
+        </div>
+        <div class="card__footer">
+        <div class="user">
+            <img src="{{ post.author.photo.url }}" alt="user__image" class="user__image">
+            <div class="user__info">
+            <h5>{{ post.author }}</h5>
+            <small>{{ post.created_at }}</small>
+            </div>
+        </div>
+        </div>
+</div>  

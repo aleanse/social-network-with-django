@@ -4,8 +4,7 @@ from user.forms import RegisterForm, LoginForm, PostForm, Edit_profileForm
 from django.contrib.auth import  login, logout
 from user.utils.authenticate import authenticate_by_email
 from django.contrib import messages
-from user.models import User, Post, Seguidor
-from django.shortcuts import get_object_or_404
+from user.models import User, Seguidor
 
 
 # Create your views here.
@@ -52,7 +51,7 @@ def create_login(request):
 
 def post(request):
     form = PostForm()
-    return render(request,'create-post.html',context={'form':form})
+    return render(request,'create_post.html',context={'form':form})
 
 def create_post(request):
     form = PostForm(request.POST, request.FILES)
@@ -111,7 +110,13 @@ def create_edit_profile(request):
         print(form.errors)
     return redirect('home')
 
+def area_user(request, id):
+    user = User.objects.get(id=id)
+    seguido = Seguidor.objects.get_or_create(usuario=request.user, seguindo=user)
+    return render(request,'area_profile.html',context={'user':user})
+
 
 def home(request):
-    return render(request, 'home.html')
+    users = User.objects.all()
+    return render(request, 'home.html',context={'users':users})
 

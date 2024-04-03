@@ -1,6 +1,6 @@
 <div class="card-container">
 		<img class="round" src="{{ i.photo.url }}" alt="user" />
-	<h3>{{ i.username }}</h3>
+	<a href="{% url 'area_user' i.id %}"><h3>{{ i.username }}</h3></a>
 	
 	<div class="buttons">
 		<button class="primary ghost">

@@ -16,5 +16,6 @@ urlpatterns = [
     path('users/',views.users,name='users'),
     path('users/<int:id>',views.follow,name='follow'),
     path('edit_profile/',views.edit_profile,name='edit_profile'),
-    path('create_edit_profile/',views.create_edit_profile,name='create_edit_profile')
+    path('create_edit_profile/',views.create_edit_profile,name='create_edit_profile'),
+    path('user/<int:id>',views.area_user,name='area_user')
 ]

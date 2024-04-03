@@ -17,7 +17,17 @@ h6 {
     justify-content: center;
     flex-direction: row;
     align-items: center;
+	margin-top: 10px;
 	gap: 10px;
+}
+
+.posts_user{
+	font-family: "Quicksand", sans-serif;
+  	display: grid;
+  	place-items: center;
+  	margin-top: 5rem;
+	grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas de largura igual */
+	gap: 20px;
 }
 
 .link-seguir{
@@ -85,7 +95,7 @@ button.primary.ghost {
 }
 
 .skills {
-	background-color: #1F1A36;
+	background-color: #231E39;
 	text-align: left;
 	padding: 15px;
 	margin-top: 30px;
