@@ -21,7 +21,9 @@
 
 .card__header img{
   display: block;
-  object-fit: cover;
+  object-fit:contain;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 
@@ -82,4 +84,3 @@
 .user__info h5{
   color: black;
 }
-
