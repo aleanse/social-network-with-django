@@ -11,9 +11,11 @@
 		</button>
 		
 	</div>
-	<button class="primary">
-		Message
-	</button>
+	<form class="message" action="{% url 'room' request.user.id i.id %}">
+		<button type="submit" class="primary">
+			Message
+		</button>
+	</form>
 	<div class="skills">
 	
 	</div>

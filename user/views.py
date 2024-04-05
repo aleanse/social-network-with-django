@@ -29,9 +29,6 @@ def login_view(request):
     return render(request,'login.html',context={'form':form})
 
 
-
-
-
 def create_login(request):
     form = LoginForm(request.POST)
     if form.is_valid():

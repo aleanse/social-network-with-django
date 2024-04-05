@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'room.css' %}">
+    <title>Enter Room</title>
+</head>
+<body>
+    <div class="parent">
+        <div class="child">
+            <h1>Enter Room</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label for="">Username</label><br>
+                <input type="text" placeholder="Username" name="username" required><br>
+                <label for="">Room name</label><br>
+                <input type="text" placeholder="room name" name="room" required><br>
+                <button type="submit">Submit</button<br>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
