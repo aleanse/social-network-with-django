@@ -18,17 +18,18 @@
                 <div class="chat-body" id="tasks">
                     <div class="message" id="chatContainer">
                       <!-- received messages and displayed here -->
-                        {% for i in messages %}
-                            {% if i.sender != user %}
-                                <div class="receive">
-                                    <p style="color: #000;"> {{i.message}}<strong>-{{i.sender}}</strong></p>
-                                </div>
-                            {% else %}
-                                <div class="send">
-                                    <p style="color: #000;">{{i.message}}</p>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+                        
+                            {% for message in messages %}
+                            <div class="receive">
+                                    <p style="color: red;"> {{message.content }}<strong>-{{message.receiver}}</strong></p>
+                            </div>
+                            
+                            <div class="send">
+                                    <p style="color: #000;">{{message.sender }}</p>
+                            </div>
+                            {% endfor %}
+                            
+                        
                     <!-- end receive messages -->
                     </div>
 
@@ -61,7 +62,7 @@
             JSON.stringify({
                 'message': message,
                 'room_name': '{{room_name}}',
-                'sender': '{{user}}',
+                'sender': '{{sender}}',
             })
         )
     });
@@ -81,7 +82,7 @@
 
         // Here's where we append the message to the chatbox.
         var messageDiv = document.querySelector('.message');
-        if (sender != '{{user}}') { // assuming you have a variable `currentUser` to hold the current user's name
+        if (sender != '{{sender}}') { // assuming you have a variable `currentUser` to hold the current user's name
             messageDiv.innerHTML += '<div class="receive"><p style="color: #000;">' + message + '<strong>-' + sender + '</strong></p></div>';
         } else {
             messageDiv.innerHTML += '<div class="send"><p style="color: #000;">' + message + '</p></div>';
