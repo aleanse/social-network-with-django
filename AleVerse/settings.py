@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'daphne',
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'websocket',
-    #'channels',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +76,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'AleVerse.wsgi.application'
+ASGI_APPLICATION = "AleVerse.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"},
+}
 
 
 # Database

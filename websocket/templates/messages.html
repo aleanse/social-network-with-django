@@ -16,6 +16,7 @@
             <h2>Chats</h2><hr>
             <div class="chat-body-parent">
                 <div class="chat-body" id="tasks">
+                    <center style="color: green;"><h1>Whatssapp 2</h1></center>
                     <div class="message" id="chatContainer">
                       <!-- received messages and displayed here -->
                         
@@ -52,7 +53,7 @@
     }
 
     const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
-    const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/{{room_name}}/`;
+    const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/{{request.user.id}}/{{message.receiver}}`;
     const socket = new WebSocket(wsEndpoint);
 
     document.getElementById('message-form').addEventListener('submit', function(event){
