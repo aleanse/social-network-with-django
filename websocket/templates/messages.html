@@ -17,22 +17,20 @@
                 <div class="chat-body" id="tasks">
                     <center style="color: blue; font-size: 25px"><h1>Chat em tempo real</h1></center>
                     <div class="message" id="chatContainer">
-                      <!-- received messages and displayed here -->
-                        
-                            {% for message in messages %}
-                            <div class="receive">
-                                    <p style="color: red;"> {{message.content }}<strong>-{{message.receiver}}</strong></p>
-                            </div>
-                            
-                            <div class="send">
-                                    <p style="color: #000;">{{message.sender }}</p>
-                            </div>
-                            {% endfor %}
-                            
-                        
-                    <!-- end receive messages -->
+                        <!-- Received messages are displayed here -->
+                        {% for i in messages %}
+                            {% if i.sender != user %}
+                                <div class="receive">
+                                    <p style="color: #000;"> {{i.message}}<strong>-{{i.sender}}</strong></p>
+                                </div>
+                            {% else %}
+                                <div class="send">
+                                    <p style="color: #000;">{{i.message}}</p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <!-- End of received messages -->
                     </div>
-
                     <div class="form">
                         <form action="" id="message-form" method="POST">
                             {% csrf_token %}
@@ -51,51 +49,24 @@
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
+   // Determine the WebSocket protocol based on the application's URL
     const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
-    const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/{{request.user.id}}/{{message.receiver}}`;
+    const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/{{room_name}}/`;
+
+    // Create a new WebSocket connection
     const socket = new WebSocket(wsEndpoint);
 
-    document.getElementById('message-form').addEventListener('submit', function(event){
-        event.preventDefault();
-        const message = document.getElementById('msg').value;
-        socket.send(
-            JSON.stringify({
-                'message': message,
-                'room_name': '{{room_name}}',
-                'sender': '{{sender}}',
-            })
-        )
-    });
-
-    // response from consumer on server
-    socket.addEventListener("message"), event => {
-        const messageData = JSON.parse(event.data)['message'];
-        console.log(messageData);
-        
-        var sender = messageData['sender'];
-        var message = messageData['message'];
-
-        // empty message input field after message has been sent
-        if (sender == {{user}}){
-            document.getElementById('msg').value = '';
-        }
-
-        // Here's where we append the message to the chatbox.
-        var messageDiv = document.querySelector('.message');
-        if (sender != '{{sender}}') { // assuming you have a variable `currentUser` to hold the current user's name
-            messageDiv.innerHTML += '<div class="receive"><p style="color: #000;">' + message + '<strong>-' + sender + '</strong></p></div>';
-        } else {
-            messageDiv.innerHTML += '<div class="send"><p style="color: #000;">' + message + '</p></div>';
-        }
-        scrollToBottom();
-    };
+    // Successful connection event
     socket.onopen = (event) => {
         console.log("WebSocket connection opened!");
     };
 
+    // Socket disconnect event
     socket.onclose = (event) => {
         console.log("WebSocket connection closed!");
     };
+
+   
 
 </script>
 

@@ -1,29 +1,31 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
 from user.models import User
-from .models import Message
-# Create your views here.
+from .models import Message,Room
+import uuid
 
-#def CreateRoom(request):
- #   if request.method == 'POST':
-  #       user = request.user
-   #      sent_messages = Message.objects.filter(sender=user)
-    #     data = [{'sender': message.sender.username, 'receiver': message.receiver.username, 'content': message.content, 'timestamp': message.timestamp} for message in sent_messages]
-     #    return JsonResponse(data, safe=False)
-    #return render(request, 'index.html')
+id_unico = uuid.uuid4()
 
 
-def MessageView(request, send_name, receiver_username):
-    sender = request.user
-    receiver = User.objects.get(id=receiver_username)
+def CreateRoom(request):
+    receiver_username = id_unico
+    room = request.user.username
     try:
-        message = Message.objects.get_or_create(sender=sender,receiver=receiver)
-        print(message)    
-    except message.DoesNotExist:
-        message = Message(sender=sender,receiver=receiver)
-        message.save()    
-    return render(request, 'messages.html',context={'messages':message,
-                                                    'sender':sender,
-                                                    'receiver':receiver})
+        return redirect('message', room_name=room, receiver_username=receiver_username)
+    except Room.DoesNotExist:
+        new_room = Room(room_name=room)
+        new_room.save()
+        return redirect('message', room_name=room, receiver_username=receiver_username)
+
+
+def MessageView(request,room_name,receiver_username):
+    get_room = Room.objects.get(room_name=room_name)
+    get_messages = Message.objects.filter(room=get_room)
+    
+
+    return render(request, 'messages.html',context={"messages": get_messages,
+        "receiver_username": receiver_username,
+        "room_name": room_name,})
 
 
 

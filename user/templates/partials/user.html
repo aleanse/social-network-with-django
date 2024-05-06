@@ -11,7 +11,7 @@
 		</button>
 		
 	</div>
-	<form class="message" action="{% url 'room' request.user.id i.id %}">
+	<form class="message" action="{% url 'room'  i.username %}">
 		<button type="submit" class="primary">
 			Message
 		</button>
