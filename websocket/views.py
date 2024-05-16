@@ -4,28 +4,31 @@ from user.models import User
 from .models import Message,Room
 import uuid
 
-id_unico = uuid.uuid4()
 
-
-def CreateRoom(request):
-    receiver_username = id_unico
-    room = request.user.username
+def CreateRoom(request, id_receiver):
+    user = request.user
+    receiver = User.objects.get(id=id_receiver) # pega o usuario destinatario
     try:
-        return redirect('message', room_name=room, receiver_username=receiver_username)
+        get_room = Room.objects.get(users=user and receiver) # tenta pegar a sala onde onde estão ligados o destinatario e remetente
+        
+        return redirect('message',room_name=str(get_room.room_name),username=user.username)
     except Room.DoesNotExist:
-        new_room = Room(room_name=room)
-        new_room.save()
-        return redirect('message', room_name=room, receiver_username=receiver_username)
-
-
-def MessageView(request,room_name,receiver_username):
-    get_room = Room.objects.get(room_name=room_name)
+       room = Room.objects.create(room_name=uuid.uuid4())
+       room.users.add(user, receiver)
+       print(room.users.all())
+       return redirect('message',room_name=str(room.room_name),username=user.username)
+        
+def MessageView(request,room_name,username):
+    get_room = Room.objects.get(room_name=room_name) 
     get_messages = Message.objects.filter(room=get_room)
+
     
-
-    return render(request, 'messages.html',context={"messages": get_messages,
-        "receiver_username": receiver_username,
-        "room_name": room_name,})
-
+    
+    return render(request, 'messages.html',context = {
+        "messages": get_messages,
+        "user": username,
+        "room_name": room_name,
+    })
+    
 
 
