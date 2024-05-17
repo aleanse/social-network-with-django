@@ -3,16 +3,22 @@ from django.shortcuts import redirect, render
 from user.models import User
 from .models import Message,Room
 import uuid
+from django.db.models import Q
 
 
 def CreateRoom(request, id_receiver):
     user = request.user
     receiver = User.objects.get(id=id_receiver) # pega o usuario destinatario
     try:
-        get_room = Room.objects.get(users=user and receiver) # tenta pegar a sala onde onde estão ligados o destinatario e remetente
+        
+        get_room =  Room.objects.filter(users=user).filter(users=receiver).distinct().first() # tenta pegar a sala onde onde estão ligados o destinatario e remetente
+        if get_room == None:
+            raise Room.DoesNotExist
+        
+       
         
         return redirect('message',room_name=str(get_room.room_name),username=user.username)
-    except Room.DoesNotExist:
+    except Room.DoesNotExist :
        room = Room.objects.create(room_name=uuid.uuid4())
        room.users.add(user, receiver)
        print(room.users.all())
