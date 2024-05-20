@@ -1,18 +1,40 @@
 <div class="card">
-        <div class="card__header">
-        <img src="{{ post.image.url }}" alt="card__image" class="card__image">
-        </div>
-        <div class="card__body">
-        <h4>{{ post.title }}</h4>
-        <p>{{ post.text_post }}</p>
-        </div>
-        <div class="card__footer">
-        <div class="user">
-            <img src="{{ post.author.photo.url }}" alt="user__image" class="user__image">
-            <div class="user__info">
-            <h5>{{ post.author }}</h5>
-            <small>{{ post.created_at }}</small>
+    <div class="top">
+        <div class="userDeatils">
+            <div class="profileImg">
+                <img src="{{ post.author.photo.url }}" alt="user" class="cover">
             </div>
+            <h3>{{ post.author }}<br></h3>
         </div>
+        <div class="dot">
+            <img src="dot.png" alt="dot">
         </div>
-</div>  
+    </div>
+    <div class="imgBg">
+        <img src="{{ post.image.url }}" alt="bg" class="cover">
+    </div>
+    <div class="btns">
+        <div class="left">
+            <img src="heart.png" alt="heart" class="heart" onclick="likeButton()">
+            <img src="comment.png" alt="comment">
+            <img src="share.png" alt="share">
+        </div>
+        <div class="right">
+            <img src="bookmark.png" alt="bookmark">
+        </div>
+    </div>
+    <h4 class="likes">5,489 likes</h4>
+    <h4 class="message">
+        <b>{{ post.title }}</b>
+        {{ post.text_post }}
+        
+    </h4>
+    <h4 class="comments">View all 546 comments</h4>
+    <div class="addComments">
+        <div class="userImg">
+            <img src="{{ post.author.photo.url }}" alt="user" class="cover">
+        </div>
+        <input type="text" class="text" placeholder="Add a comment...">
+    </div>
+    <h5 class="postTime">{{ post.created_at }}</h5>
+</div>

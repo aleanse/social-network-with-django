@@ -4,83 +4,150 @@
 
 .home{
   font-family: "Quicksand", sans-serif;
-  display: grid;
-  place-items: center;
-  margin-top: 9rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 7rem;
 }
 
 .container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-direction: column;
   max-width: 1200px;
   margin-block: 2rem;
   gap: 2rem;
 }
 
 
-.card__header img{
-  display: block;
-  object-fit:contain;
-  max-height: 100%;
-  max-width: 100%;
+
+
+.card{
+  position: relative;
+  width: 22.5rem;       
+  min-height: 25rem;
+  background: black;
+  box-shadow: inset 0 0 0.5px rgba(0, 0, 0, 0.5); /* sombra interna de 0.5 pixels */
+  border-style: solid;
+  border-color: white;
+  border-width: 0.5px;
+  padding: 20px;
 }
-
-
-.card {
+.card .top{
   display: flex;
-  flex-direction: column;
-  width: clamp(20rem, calc(20rem + 2vw), 22rem);
-  overflow: hidden;
-  box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
-  border-radius: 1em;
-  background: #ECE9E6;
-  background: linear-gradient(to right, #FFFFFF, #ECE9E6);
-
+  justify-content: space-between;
+  align-items: center;
 }
-
-
-
-.card__body {
-  padding: 1rem;
+.card .top .userDeatils{
   display: flex;
-  flex-direction: column;
-  gap: .5rem;
+  align-items: center;
 }
 
-
-
-
-.card__body h4{
-  font-size: 1.5rem;
-  text-transform: capitalize;
-  color: black;
-}
-.card__body p{
-  color: black;
-}
-
-.card__footer {
-  display: flex;
-  padding: 1rem;
-  margin-top: auto;
-}
-
-.user {
-  display: flex;
-  gap: .5rem;
-}
-
-.user__image {
+.card .top .userDeatils .profileImg{
+  position: relative;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  margin-right: 8px;
+  overflow: hidden;
+}
+.cover{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}
+.card .top .userDeatils h3{
+  font-size: 18px;
+  color: white;
+  font-weight: 700;
+  line-height: 1rem;
+  cursor: pointer;
+}
+.card .top .userDeatils span{
+  font-size: 0.75em;
+}
+.card .top .dot{
+  transform: scale(0.6);
+  cursor: pointer;
+}
+.imgBg{
+  position: relative;
+  width: 100%;
+  height: 320px;
+  margin: 10px 0 15px;
+}
+.btns{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btns img{
+  max-width: 24px;
+  cursor: pointer;
+}
+.btns .left img{
+  margin-right: 8px;
+}
+.likes{
+  margin-top: 5px;
+  font-size: 1em;
+  color: white;
+}
+.message{
+  font-weight: 400;
+  margin-top: 5px;
+  color: #777;
+  line-height: 1.5em;
+}
+.message b{
+  color: whitesmoke;
+}
+.message span{
+  color: #1d92ff;
+  cursor: pointer;
+}
+.comments{
+  margin-top: 10px;
+  align-items: center;
+  color: #999;
+}
+.addComments{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.addComments .userImg{
+  position: relative;
+  min-width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+}
+.addComments .text{
+  width: 100%;
+  border: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 18px;
+  color: #262626;
 }
 
-.user__info > small {
-  color: #666;
-}
+.addComments .text{
+  background-color: black;
+  color: white;
+  
 
-.user__info h5{
-  color: black;
+}
+.addComments .text::placeholder{
+  color: #777;
+}
+.postTime{
+  margin-top: 10px;
+  font-weight: 500;
+  color: #777;
 }

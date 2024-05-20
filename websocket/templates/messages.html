@@ -9,39 +9,57 @@
     <title>Messages</title>
     <link rel="stylesheet" href="{% static 'room.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class="parent">
-        <div class="child-2">
-            <div class="chat-body-parent">
-                <div class="chat-body" id="tasks">
-                    <h1>Chat em tempo real</h1>
-                    <div class="message" id="chatContainer">
-                        <!-- Received messages are displayed here -->
-                        {% for i in messages %}
-                            {% if i.sender != user %}
-                                <div class="receive">
-                                    <p style="color: #000;"> {{i.message}}<strong>-{{i.sender}}</strong></p>
-                                </div>
-                            {% else %}
-                                <div class="send">
-                                    <p style="color: #000;">{{i.message}}</p>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                        <!-- End of received messages -->
-                    </div>
-                    <div class="form">
-                        <form action="" id="message-form" method="POST">
-                            {% csrf_token %}
-                            <textarea id="msg" cols="30" name="message" rows="10" placeholder="Enter your message" required></textarea>
-                            <button class="submit" type="submit">Send</button>
-                        </form>    
-                    </div>
-                </div>
+    
+
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <div class="nav-icons">
+                <i class="fas fa-arrow-left"></i>
+                <img src="{{request.user.photo.url}}" alt="Cliente" class="avatar">
+                <div class="contact-name">Aleanse CEO</div>
+            </div>
+            <div class="action-icons">
+                <i class="fas fa-video"></i>
+                <i class="fas fa-phone-alt"></i>
+                <i class="fas fa-ellipsis-v"></i>
             </div>
         </div>
+        <div class="chat-messages" id="chat-messages">
+            {% for i in messages %}
+                {% if i.sender != user %}
+                    <div class="message received">
+                        <img src="app2.png" alt="Cliente" class="message-avatar">
+                        <div class="message-content-wrapper">
+                            <div class="message-content">{{i.message}}</div>
+                            <div class="message-time">19:30</div>
+                        </div>
+                    </div>
+                {% else %}   
+                    <div class="message sent">
+                        <img src="app1.png" alt="Você" class="message-avatar">
+                        <div class="message-content-wrapper">
+                            <div class="message-content">{{i.message}}</div>
+                            <div class="message-time">19:31</div>
+                        </div>
+                    </div>
+                 {% endif %}   
+             {% endfor %}    
+        </div>
+        <div class="chat-input">
+            <button type="button" id="photo-button"><i class="fas fa-camera"></i></button>
+            <button type="button" id="file-button"><i class="fas fa-paperclip"></i></button>
+            <form action="" id="message-form" method="POST">
+                {% csrf_token %}
+                <input type="text"  id="msg" placeholder="Digite uma mensagem...">
+                <button type="submit" class="submit" id="send-button"><i class="fas fa-paper-plane"></i></button>
+            </form>
+           
+        </div>
     </div>
+
 </body>
 <script>
     function scrollToBottom() {
@@ -68,8 +86,9 @@
     // Form submit listener
     document.getElementById('message-form').addEventListener('submit', function(event){
         event.preventDefault();
-        const message = value;
-        socket.send(document.getElementById('msg').
+        const message = document.getElementById('msg').value;
+        console.log(message)
+        socket.send(
             JSON.stringify({
                 'message': message,
                 'room_name': '{{room_name}}',
@@ -89,16 +108,62 @@
         if (sender == '{{user}}'){
             document.getElementById('msg').value = '';
         }
-
-        // Append the message to the chatbox
-        var messageDiv = document.querySelector('.message');
-        if (sender != '{{user}}') { // Assuming you have a variable `currentUser` to hold the current user's name
-            messageDiv.innerHTML += '<div class="receive"><p style="color: #000;">' + message + '<strong>-' + sender + '</strong></p></div>';
-        } else {
-            messageDiv.innerHTML += '<div class="send"><p style="color: #000;">' + message + '</p></div>';
-        }
         scrollToBottom();
     });
+
+
+
+    document.getElementById('send-button').addEventListener('click', sendMessage);
+document.getElementById('msg').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+
+document.getElementById('photo-button').addEventListener('click', function() {
+    alert('Enviar foto ainda não implementado');
+});
+
+document.getElementById('file-button').addEventListener('click', function() {
+    alert('Enviar arquivo ainda não implementado');
+});
+
+
+function sendMessage() {
+    const messageInput = document.getElementById('msg');
+    const messageText = messageInput.value.trim();
+    if (messageText !== '') {
+        const messageContainer = document.createElement('div');
+        messageContainer.classList.add('message', 'sent');
+
+        const messageAvatar = document.createElement('img');
+        messageAvatar.src = 'usuario.jpg';
+        messageAvatar.alt = 'Você';
+        messageAvatar.classList.add('message-avatar');
+
+        const messageContentWrapper = document.createElement('div');
+        messageContentWrapper.classList.add('message-content-wrapper');
+
+        const messageContent = document.createElement('div');
+        messageContent.classList.add('message-content');
+        messageContent.innerHTML = messageText;
+
+        const messageTime = document.createElement('div');
+        messageTime.classList.add('message-time');
+        const now = new Date();
+        messageTime.innerHTML = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+        messageContentWrapper.appendChild(messageContent);
+        messageContentWrapper.appendChild(messageTime);
+
+        messageContainer.appendChild(messageAvatar);
+        messageContainer.appendChild(messageContentWrapper);
+
+        document.getElementById('chat-messages').appendChild(messageContainer);
+        messageInput.value = '';
+        document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+    }
+}
 
    
 

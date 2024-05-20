@@ -27,6 +27,9 @@ def CreateRoom(request, id_receiver):
 def MessageView(request,room_name,username):
     get_room = Room.objects.get(room_name=room_name) 
     get_messages = Message.objects.filter(room=get_room)
+    
+
+    
 
     
     
