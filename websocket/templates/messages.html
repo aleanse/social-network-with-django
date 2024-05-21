@@ -17,7 +17,10 @@
         <div class="chat-header">
             <div class="nav-icons">
                 <a href=" {% url 'users' %}" class="fas fa-arrow-left"></a>
-                <img src="{{request.user.photo.url}}" alt="Cliente" class="avatar">
+                {% for user in receive %}
+                    <img src="{{ user.photo.url }}" alt="Cliente" class="avatar">
+                {% endfor %}
+                
                 <div class="contact-name">
                     {% for user in receive %}
                         {{ user.username }}
@@ -116,8 +119,10 @@
         }
         var messageDiv = document.querySelector('.chat-messages');
         if (sender != '{{user}}') {
-        messageDiv.innerHTML += '<div class="message received">' +
-                                    '<img src="app2.png" alt="Cliente" class="message-avatar">' +
+        messageDiv.innerHTML += '<div class="message received">' + 
+                                    '{% for user in receive %}' +
+                                        '<img src=" {{ user.photo.url }}" alt="Cliente" class="message-avatar">' +
+                                    '{% endfor %}' +
                                     '<div class="message-content-wrapper">' +
                                         '<div class="message-content">' + message + '</div>' +
                                         '<div class="message-time">19:30</div>' +
@@ -125,7 +130,7 @@
                                 '</div>';
         } else {
         messageDiv.innerHTML += '<div class="message sent">' +
-                                    '<img src="app1.png" alt="Você" class="message-avatar">' +
+                                    '<img src=" {{ request.user.photo.url }} " alt="Você" class="message-avatar">' +
                                     '<div class="message-content-wrapper">' +
                                         '<div class="message-content">' + message + '</div>' +
                                         '<div class="message-time">19:31</div>' +

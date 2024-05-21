@@ -18,7 +18,8 @@ def create_register(request):
     if form.is_valid():
         user = form.save(commit=False) #salva os dados mas ainda não manda para o banco de dados
         user.set_password(user.password)
-        user.photo = form[request.FILES]
+        if 'image' in request.FILES:
+                user.photo = request.FILES['image']
         user.save()
         return redirect('login')
     else:
@@ -98,11 +99,13 @@ def edit_profile(request):
 
 
 def create_edit_profile(request):
-    instance = request.user
-    form = Edit_profileForm(request.POST,request.FILES,instance=instance)
+    instance_user = request.user
+    form = Edit_profileForm(request.POST,request.FILES,instance=instance_user)
     if form.is_valid():
         user = form.save(commit=False)
         user.set_password(user.password)
+        if 'image' in request.FILES:
+                user.photo = request.FILES['image']
         user.save()
     else:
         print(form.errors)
