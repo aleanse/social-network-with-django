@@ -18,6 +18,7 @@ def create_register(request):
     if form.is_valid():
         user = form.save(commit=False) #salva os dados mas ainda não manda para o banco de dados
         user.set_password(user.password)
+        user.photo = form[request.FILES]
         user.save()
         return redirect('login')
     else:

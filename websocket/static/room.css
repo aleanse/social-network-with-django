@@ -11,7 +11,10 @@ body {
 }
 
 
-
+a{
+ text-decoration: none;
+ color:white;
+}
 
 .chat-container {
     background-color: #1e1e1e;

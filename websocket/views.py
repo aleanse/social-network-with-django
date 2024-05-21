@@ -27,16 +27,18 @@ def CreateRoom(request, id_receiver):
 def MessageView(request,room_name,username):
     get_room = Room.objects.get(room_name=room_name) 
     get_messages = Message.objects.filter(room=get_room)
+    print(get_room.users.exclude(id=request.user.id))
+    receive = get_room.users.exclude(id=request.user.id)
     
 
     
 
-    
     
     return render(request, 'messages.html',context = {
         "messages": get_messages,
         "user": username,
         "room_name": room_name,
+        "receive": receive
     })
     
 

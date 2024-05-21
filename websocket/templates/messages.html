@@ -12,14 +12,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    
 
     <div class="chat-container" id="chatContainer">
         <div class="chat-header">
             <div class="nav-icons">
-                <i class="fas fa-arrow-left"></i>
+                <a href=" {% url 'users' %}" class="fas fa-arrow-left"></a>
                 <img src="{{request.user.photo.url}}" alt="Cliente" class="avatar">
-                <div class="contact-name">Aleanse CEO</div>
+                <div class="contact-name">
+                    {% for user in receive %}
+                        {{ user.username }}
+                    {% endfor %}
+                </div>
             </div>
             <div class="action-icons">
                 <i class="fas fa-video"></i>
@@ -31,7 +34,10 @@
             {% for i in messages %}
                 {% if i.sender != user %}
                     <div class="message received">
-                        <img src="app2.png" alt="Cliente" class="message-avatar">
+                        {% for user in receive %}
+
+                        <img src="{{  user.photo.url  }}" alt="Cliente" class="message-avatar">
+                        {% endfor %}
                         <div class="message-content-wrapper">
                             <div class="message-content">{{i.message}}</div>
                             <div class="message-time">19:30</div>
@@ -39,7 +45,7 @@
                     </div>
                 {% else %}   
                     <div class="message sent">
-                        <img src="app1.png" alt="Você" class="message-avatar">
+                        <img src="{{request.user.photo.url}}" alt="Você" class="message-avatar">
                         <div class="message-content-wrapper">
                             <div class="message-content">{{i.message}}</div>
                             <div class="message-time">19:31</div>
@@ -108,17 +114,30 @@
         if (sender == '{{user}}'){
             document.getElementById('msg').value = '';
         }
+        var messageDiv = document.querySelector('.chat-messages');
+        if (sender != '{{user}}') {
+        messageDiv.innerHTML += '<div class="message received">' +
+                                    '<img src="app2.png" alt="Cliente" class="message-avatar">' +
+                                    '<div class="message-content-wrapper">' +
+                                        '<div class="message-content">' + message + '</div>' +
+                                        '<div class="message-time">19:30</div>' +
+                                    '</div>' +
+                                '</div>';
+        } else {
+        messageDiv.innerHTML += '<div class="message sent">' +
+                                    '<img src="app1.png" alt="Você" class="message-avatar">' +
+                                    '<div class="message-content-wrapper">' +
+                                        '<div class="message-content">' + message + '</div>' +
+                                        '<div class="message-time">19:31</div>' +
+                                    '</div>' +
+                                '</div>';
+                    }
+
         scrollToBottom();
     });
 
 
 
-    document.getElementById('send-button').addEventListener('click', sendMessage);
-document.getElementById('msg').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
 
 document.getElementById('photo-button').addEventListener('click', function() {
     alert('Enviar foto ainda não implementado');
@@ -127,7 +146,6 @@ document.getElementById('photo-button').addEventListener('click', function() {
 document.getElementById('file-button').addEventListener('click', function() {
     alert('Enviar arquivo ainda não implementado');
 });
-
 
 function sendMessage() {
     const messageInput = document.getElementById('msg');
@@ -164,8 +182,6 @@ function sendMessage() {
         document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
     }
 }
-
-   
 
 </script>
 
