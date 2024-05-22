@@ -14,21 +14,7 @@ class Edit_profileForm(forms.ModelForm):
         model = User
         fields = ['username','email','password']
 
-    def clean_username(self):
-        data = self.cleaned_data.get('username')
-        user = User.objects.filter(username=data).exists()
-        if user:
-            raise ValidationError('username already exists',code='invalid',)
-        else:
-            return data    
-        
-    def clean_email(self):
-        data = self.cleaned_data.get('email')
-        user = User.objects.filter(email=data).exists()
-        if user:
-            raise ValidationError('email already exists',code='invalid',)
-        else:
-            return data
+    
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get('password')

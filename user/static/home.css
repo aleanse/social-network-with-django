@@ -151,3 +151,13 @@
   font-weight: 500;
   color: #777;
 }
+
+.comment {
+  height: 1.5625rem; 
+  width: 1.5625rem; 
+}
+
+.heart {
+  height: 1.75rem;  
+  width: 1.875rem; 
+}
