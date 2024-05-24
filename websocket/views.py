@@ -4,6 +4,10 @@ from user.models import User
 from .models import Message,Room
 import uuid
 from django.db.models import Q
+from cryptography.fernet import Fernet
+from django.conf import settings
+
+f = Fernet(settings.ENCRYPT_KEY)
 
 
 def CreateRoom(request, id_receiver):
@@ -21,7 +25,6 @@ def CreateRoom(request, id_receiver):
     except Room.DoesNotExist :
        room = Room.objects.create(room_name=uuid.uuid4())
        room.users.add(user, receiver)
-       print(room.users.all())
        return redirect('message',room_name=str(room.room_name),username=user.username)
         
 def MessageView(request,room_name,username):
