@@ -16,6 +16,14 @@ class Message(models.Model):
     sender = models.CharField(max_length=255)
     message = models.TextField()
 
+    @property
+    def message_decrypted(self):
+        f = Fernet(settings.ENCRYPT_KEY)
+        message_decrypted = f.decrypt(self.message)
+        message_decode = message_decrypted.decode('utf-8')
+
+        return message_decode
+
     def __str__(self):
         return str(self.room)
    
