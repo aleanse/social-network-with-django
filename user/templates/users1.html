@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% include 'partials/head.html' %}
+</head>
+<body class="body1">
+    {% include 'partials/header1.html' %}
+    <main class="followers-container">
+        {% for i in user %}
+            {% if i != request.user %}
+                {% include 'partials/user1.html' %}
+            {% endif %}
+        {% endfor %}
+    </main>
+    <script src="{% static 'script(1).js' %}"></script>
+<body>    
