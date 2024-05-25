@@ -2,6 +2,10 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from websocket.models import *
+from cryptography.fernet import Fernet
+from django.conf import settings
+
+f = Fernet(settings.ENCRYPT_KEY)
 
 class ChatConsumer(AsyncWebsocketConsumer):
      async def connect(self):
@@ -38,6 +42,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
      @database_sync_to_async #criamos essa função pois não é possivel manipular banco de dados dentro de uma função async
      def create_message(self, data):
         get_room_by_name = Room.objects.get(room_name=data['room_name'])
+        message_original = data['message']
+        message_bytes = message_original.encode('utf-8')
+        message_encrypted = f.encrypt((message_bytes))
+        message_decoded = message_encrypted.decode('utf-8')
+
+
         if not Message.objects.filter(message=data['message']).exists():
-            new_message = Message(room=get_room_by_name, sender=data['sender'], message=data['message'])
+            new_message = Message(room=get_room_by_name, sender=data['sender'], message=message_decoded)
             new_message.save()

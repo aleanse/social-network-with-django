@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="nav-container">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <div class="nav-links" id="navLinks">
+            <a href="#" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+              </svg>Edit profile</a>
+            <a href="#" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+              </svg>Users</a>
+            <a href="#" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-rounded-plus" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                <path d="M15 12h-6" />
+                <path d="M12 9v6" />
+              </svg>Create post</a>
+            <a href="#" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout-2" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
+                <path d="M15 12h-12l3 -3" />
+                <path d="M6 15l-3 -3" />
+              </svg>Logout</a>
+        </div>
+        <div class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <audio id="notification-sound" src="level-up-191997.mp3"></audio>
+        </div>
+    </div>
+    <div class="followers-container">
+        <div class="follower-card">
+            <div class="avatar-container">
+                <img src="Captura de tela 2024-05-22 102357.png" alt="Avatar" class="avatar">
+            </div>
+            <h3>Maria</h3>
+            <p><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+              </svg>3 Seguidores</p>
+            <button class="follow-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+              </svg>Seguir</button>
+            <button class="message-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+              </svg>Mensagem</button>
+        </div>
+        <div class="follower-card">
+            <div class="avatar-container">
+                <img src="ronaldo.jpg" alt="Avatar" class="avatar">
+            </div>
+            <h3>CR7</h3>
+            <p><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+              </svg>2 Seguidores</p>
+            <button class="follow-btn"> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+              </svg>Seguir</button>
+            <button class="message-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+              </svg>Mensagem</button>
+        </div>
+        <div class="follower-card">
+            <div class="avatar-container">
+                <img src="app1.png" alt="Avatar" class="avatar">
+            </div>
+            <h3>Alex</h3>
+            <p><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+              </svg>1 Seguidor</p>
+            <button class="follow-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+              </svg>Seguir</button>
+            <button class="message-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+              </svg>Mensagem</button>
+        </div>
+        <div class="follower-card">
+            <div class="avatar-container">
+                <img src="Captura de tela 2024-05-22 102423.png" alt="Avatar" class="avatar">
+            </div>
+            <h3>Islaynne</h3>
+            <p><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+              </svg>1 Seguidor</p>
+            <button class="follow-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+              </svg>Seguir</button>
+            <button class="message-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+              </svg>Mensagem</button>
+        </div>
+        <div class="follower-card">
+            <div class="avatar-container">
+                <img src="Captura de tela 2024-05-22 102721.png" alt="Avatar" class="avatar">
+            </div>
+            <h3>Ilson Mateus</h3>
+            <p><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+              </svg>1000K Seguidores</p>
+            <button class="follow-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+              </svg>Seguir</button>
+            <button class="message-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+              </svg>Mensagem</button>
+        </div>
+        <div class="follower-card">
+            <div class="avatar-container">
+                <img src="Captura de tela 2024-05-22 102437.png" alt="Avatar" class="avatar">
+            </div>
+            <h3>Eduardo</h3>
+            <p><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+              </svg>0 Seguidores</p>
+            <button class="follow-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+              </svg>Seguir</button>
+            <button class="message-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+              </svg>Mensagem</button>
+        </div>
+        <div class="follower-card">
+            <div class="avatar-container">
+                <img src="Captura de tela 2024-05-22 102340.png" alt="Avatar" class="avatar">
+            </div>
+            <h3>Jose</h3>
+            <p><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+                <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+                <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+              </svg>0 Seguidores</p>
+            <button class="follow-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+              </svg>Seguir</button>
+            <button class="message-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="15" height="10" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+              </svg>Mensagem</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

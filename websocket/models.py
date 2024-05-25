@@ -1,7 +1,8 @@
 from django.db import models
 from user.models import User
 import  django.utils.timezone
-import uuid
+from cryptography.fernet import Fernet
+from django.conf import settings
 
 
     

@@ -42,7 +42,7 @@
                         <img src="{{  user.photo.url  }}" alt="Cliente" class="message-avatar">
                         {% endfor %}
                         <div class="message-content-wrapper">
-                            <div class="message-content">{{i.message}}</div>
+                            <div class="message-content">{{i.message.message_decrypted}}</div>
                             <div class="message-time">19:30</div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                     <div class="message sent">
                         <img src="{{request.user.photo.url}}" alt="Você" class="message-avatar">
                         <div class="message-content-wrapper">
-                            <div class="message-content">{{i.message}}</div>
+                            <div class="message-content">{{i.message.message_decrypted}}</div>
                             <div class="message-time">19:31</div>
                         </div>
                     </div>
@@ -113,6 +113,7 @@
         var sender = messageData['sender'];
         var message = messageData['message'];
 
+
         // Empty the message input field after the message has been sent
         if (sender == '{{user}}'){
             document.getElementById('msg').value = '';
@@ -152,41 +153,7 @@ document.getElementById('file-button').addEventListener('click', function() {
     alert('Enviar arquivo ainda não implementado');
 });
 
-function sendMessage() {
-    const messageInput = document.getElementById('msg');
-    const messageText = messageInput.value.trim();
-    if (messageText !== '') {
-        const messageContainer = document.createElement('div');
-        messageContainer.classList.add('message', 'sent');
 
-        const messageAvatar = document.createElement('img');
-        messageAvatar.src = 'usuario.jpg';
-        messageAvatar.alt = 'Você';
-        messageAvatar.classList.add('message-avatar');
-
-        const messageContentWrapper = document.createElement('div');
-        messageContentWrapper.classList.add('message-content-wrapper');
-
-        const messageContent = document.createElement('div');
-        messageContent.classList.add('message-content');
-        messageContent.innerHTML = messageText;
-
-        const messageTime = document.createElement('div');
-        messageTime.classList.add('message-time');
-        const now = new Date();
-        messageTime.innerHTML = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
-
-        messageContentWrapper.appendChild(messageContent);
-        messageContentWrapper.appendChild(messageTime);
-
-        messageContainer.appendChild(messageAvatar);
-        messageContainer.appendChild(messageContentWrapper);
-
-        document.getElementById('chat-messages').appendChild(messageContainer);
-        messageInput.value = '';
-        document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
-    }
-}
 
 </script>
 

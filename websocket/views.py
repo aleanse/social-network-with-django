@@ -7,7 +7,6 @@ from django.db.models import Q
 from cryptography.fernet import Fernet
 from django.conf import settings
 
-f = Fernet(settings.ENCRYPT_KEY)
 
 
 def CreateRoom(request, id_receiver):
