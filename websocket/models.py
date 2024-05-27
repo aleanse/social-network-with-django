@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from user.models import User
 import  django.utils.timezone
@@ -14,6 +16,7 @@ class Room(models.Model):
     
 class Message(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    message_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     sender = models.CharField(max_length=255)
     message = models.TextField()
 
@@ -22,7 +25,6 @@ class Message(models.Model):
         f = Fernet(settings.ENCRYPT_KEY)
         message_decrypted = f.decrypt(self.message)
         message_decode = message_decrypted.decode('utf-8')
-
         return message_decode
 
     def __str__(self):

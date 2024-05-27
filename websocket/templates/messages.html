@@ -12,19 +12,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-
     <div class="chat-container" id="chatContainer">
         <div class="chat-header">
             <div class="nav-icons">
                 <a href=" {% url 'users' %}" class="fas fa-arrow-left"></a>
-                {% for user in receive %}
-                    <img src="{{ user.photo.url }}" alt="Cliente" class="avatar">
-                {% endfor %}
+
+                    <img src="{{ receive.photo.url }}" alt="Cliente" class="avatar">
+
                 
                 <div class="contact-name">
-                    {% for user in receive %}
-                        {{ user.username }}
-                    {% endfor %}
+                        {{ receive.username }}
                 </div>
             </div>
             <div class="action-icons">
@@ -35,14 +32,11 @@
         </div>
         <div class="chat-messages" id="chat-messages">
             {% for i in messages %}
-                {% if i.sender != user %}
+                {% if i.sender != request.user.username %}
                     <div class="message received">
-                        {% for user in receive %}
-
-                        <img src="{{  user.photo.url  }}" alt="Cliente" class="message-avatar">
-                        {% endfor %}
+                        <img src="{{  receive.photo.url  }}" alt="Cliente" class="message-avatar">
                         <div class="message-content-wrapper">
-                            <div class="message-content">{{i.message.message_decrypted}}</div>
+                            <div class="message-content">{{ i.message_decrypted }}</div>
                             <div class="message-time">19:30</div>
                         </div>
                     </div>
@@ -50,12 +44,12 @@
                     <div class="message sent">
                         <img src="{{request.user.photo.url}}" alt="Você" class="message-avatar">
                         <div class="message-content-wrapper">
-                            <div class="message-content">{{i.message.message_decrypted}}</div>
+                            <div class="message-content">{{ i.message_decrypted }}</div>
                             <div class="message-time">19:31</div>
                         </div>
                     </div>
-                 {% endif %}   
-             {% endfor %}    
+                {% endif %}
+            {% endfor %}
         </div>
         <div class="chat-input">
             <button type="button" id="photo-button"><i class="fas fa-camera"></i></button>
@@ -65,11 +59,8 @@
                 <input type="text"  id="msg" placeholder="Digite uma mensagem...">
                 <button type="submit" class="submit" id="send-button"><i class="fas fa-paper-plane"></i></button>
             </form>
-           
         </div>
     </div>
-
-</body>
 <script>
     function scrollToBottom() {
         var chatContainer = document.getElementById("chatContainer");
@@ -92,38 +83,39 @@
     socket.onclose = (event) => {
         console.log("WebSocket connection closed!");
     };
+
     // Form submit listener
     document.getElementById('message-form').addEventListener('submit', function(event){
         event.preventDefault();
         const message = document.getElementById('msg').value;
-        console.log(message)
+        const messageId = uuidv4();
+        console.log(messageId);
         socket.send(
             JSON.stringify({
+                'message_id': messageId,
                 'message': message,
                 'room_name': '{{room_name}}',
-                'sender': '{{user}}',
+                'sender': '{{ request.user.username }}',
+                'receive': '{{ receive }}'
             })
         );
+        document.getElementById('msg').value = '';
     });
     // recebe os dados do consumers.py e envia para todos conectados na url
     socket.addEventListener("message", (event) => {
         const messageData = JSON.parse(event.data)['message'];
-        console.log(messageData);
 
         var sender = messageData['sender'];
-        var message = messageData['message'];
+        var message = messageData['message']['message'];
+
 
 
         // Empty the message input field after the message has been sent
-        if (sender == '{{user}}'){
-            document.getElementById('msg').value = '';
-        }
+
         var messageDiv = document.querySelector('.chat-messages');
-        if (sender != '{{user}}') {
-        messageDiv.innerHTML += '<div class="message received">' + 
-                                    '{% for user in receive %}' +
-                                        '<img src=" {{ user.photo.url }}" alt="Cliente" class="message-avatar">' +
-                                    '{% endfor %}' +
+        if (sender != '{{ request.user.username }}') {
+        messageDiv.innerHTML += '<div class="message received">' +
+                                        '<img src=" {{ receive.photo.url }}" alt="Cliente" class="message-avatar">' +
                                     '<div class="message-content-wrapper">' +
                                         '<div class="message-content">' + message + '</div>' +
                                         '<div class="message-time">19:30</div>' +
@@ -143,18 +135,16 @@
     });
 
 
-
-
-document.getElementById('photo-button').addEventListener('click', function() {
-    alert('Enviar foto ainda não implementado');
-});
-
-document.getElementById('file-button').addEventListener('click', function() {
-    alert('Enviar arquivo ainda não implementado');
-});
-
-
+    function uuidv4() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = (Math.random() * 16) | 0,
+                      v = c === 'x' ? r : (r & 0x3) | 0x8;
+                return v.toString(16);
+            });
+        };
 
 </script>
+
+</body>
 
 </html>
