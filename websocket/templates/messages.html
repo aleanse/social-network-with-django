@@ -89,7 +89,6 @@
         event.preventDefault();
         const message = document.getElementById('msg').value;
         const messageId = uuidv4();
-        console.log(messageId);
         socket.send(
             JSON.stringify({
                 'message_id': messageId,

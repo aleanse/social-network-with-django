@@ -45,11 +45,12 @@ a {
 }
 
 .container__main{
-    height: 93.3vh;
+    height: auto;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin: 1rem;
     
 }
 

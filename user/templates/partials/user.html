@@ -1,22 +1,37 @@
-<div class="card-container">
-		<img class="round" src="{{ i.photo.url }}" alt="user" />
-	<a href="{% url 'area_user' i.id %}"><h3>{{ i.username }}</h3></a>
-	
-	<div class="buttons">
-		<button class="primary ghost">
-			<a class="link-seguir" href="{% url 'follow' i.id %}">Seguir</a>
-		</button>
-		<button class="primary ghost">
-			{{ i.contar_seguidores }} Seguidores
-		</button>
-		
-	</div>
-	<form class="message" action="{% url 'room' i.id %}">
-		<button type="submit" class="primary">
-			Message
-		</button>
-	</form>
-	<div class="skills">
-	
-	</div>
+<div class="follower-card">
+      <div class="avatar-container">
+          <img src="{{ i.photo.url }}" alt="Avatar" class="avatar">
+      </div>
+      <a href="{% url 'area_user' i.id %}"><h3>{{ i.username }}</h3></a>
+      <p><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group" width="20" height="20" viewBox="0 -3 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+          <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" />
+          <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+          <path d="M17 10h2a2 2 0 0 1 2 2v1" />
+          <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+          <path d="M3 13v-1a2 2 0 0 1 2 -2h2" />
+        </svg>{{ i.contar_seguidores }} Seguidores</p>
+      <div class="btn">
+          <button class="follow-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="25"
+                                          height="25" viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none"
+                                          stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+          <path d="M16 19h6" />
+          <path d="M19 16v6" />
+          <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+          </svg><a href="{% url 'follow' i.id %}">Seguir</a>
+          </button>
+
+          <button  class="message-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-telegram" width="30" height="25"
+            viewBox="0 0 30 24" stroke-width="2.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+            </svg>
+            <a href="{% url 'room' i.id %}">Message</a>
+          </button>
+      </div>
+
 </div>

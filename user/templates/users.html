@@ -4,13 +4,14 @@
 <head>
     {% include 'partials/head.html' %}
 </head>
-<body>
+<body class="body1">
     {% include 'partials/header.html' %}
-    <main class="container__users">
+    <main class="followers-container">
         {% for i in user %}
             {% if i != request.user %}
                 {% include 'partials/user.html' %}
             {% endif %}
         {% endfor %}
     </main>
+    <script src="{% static 'script.js' %}"></script>
 <body>    

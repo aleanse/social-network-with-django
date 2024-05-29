@@ -26,7 +26,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         sender = message['sender']
         receive = message['receive']
         room_name = text_data_json.get('room_name')
-        user = self.scope['user']
         data = {
             'message_id': message_id,
             'message': message,
@@ -42,7 +41,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
      async def send_message(self, event):
          data = event['message']
-         print(data)
          await self.create_message(data=data)
 
 
@@ -56,7 +54,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
      def create_message(self, data):
         get_room_by_name = Room.objects.get(room_name=data['room_name'])
         message_id = data['message_id']
-
         if not Message.objects.filter(message_id=message_id).exists():
             message_original = data['message']['message']
             message_bytes = message_original.encode('utf-8')

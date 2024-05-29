@@ -82,7 +82,7 @@ def profile(request):
 
 def users(request):
     user = User.objects.all()
-    return render(request,'users1.html',context={'user':user})
+    return render(request,'users.html',context={'user':user})
 
 
 @login_required(login_url='register', redirect_field_name='next')
