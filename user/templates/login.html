@@ -1,24 +1,15 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    {% include 'partials/head.html' %}
-</head>
-<body>
-    {% include 'partials/header.html' %}
-
-    <main class="container__main">
-        <section class="container__register">
-            <h1>Login</h1>
-            <form class="form__register" action="{% url 'create-login' %}" method="post">
-                {% csrf_token %}
-                {% for field in form%}
-                    {{field}}
-                {% endfor %}
-                <button class="button-send"  type="submit">Send</button>
-            </form>
-            {% include 'partials/messages.html' %}
-        </section>
-    </main>
-</body>
-</html>
+{% block title %}
+<main class="container__main">
+    <section class="container__register">
+        <h1>Login</h1>
+        <form class="form__register" action="{% url 'create-login' %}" method="post">
+            {% csrf_token %}
+            {% for field in form%}
+                {{field}}
+            {% endfor %}
+            <button class="button-send"  type="submit">Send</button>
+        </form>
+        {% include 'partials/messages.html' %}
+    </section>
+</main>
+{% endblock title %}

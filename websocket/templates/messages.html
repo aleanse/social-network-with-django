@@ -1,27 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Messages</title>
-    <link rel="stylesheet" href="{% static 'room.css' %}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-</head>
-<body>
+{% block content %}
     <div class="chat-container" id="chatContainer">
         <div class="chat-header">
             <div class="nav-icons">
                 <a href=" {% url 'users' %}" class="fas fa-arrow-left"></a>
-
                     <img src="{{ receive.photo.url }}" alt="Cliente" class="avatar">
-
-                
                 <div class="contact-name">
-                        {{ receive.username }}
+                    {{ receive.username }}
                 </div>
             </div>
             <div class="action-icons">
@@ -105,7 +89,8 @@
         const messageData = JSON.parse(event.data)['message'];
 
         var sender = messageData['sender'];
-        var message = messageData['message']['message'];
+        console.log(sender);
+        var message = messageData['message'];
 
 
 
@@ -113,6 +98,7 @@
 
         var messageDiv = document.querySelector('.chat-messages');
         if (sender != '{{ request.user.username }}') {
+
         messageDiv.innerHTML += '<div class="message received">' +
                                         '<img src=" {{ receive.photo.url }}" alt="Cliente" class="message-avatar">' +
                                     '<div class="message-content-wrapper">' +
@@ -141,9 +127,22 @@
                 return v.toString(16);
             });
         };
+    function notification(){
+    document.addEventListener('DOMContentLoaded', () => {
+    const bell = document.querySelector('.notification-bell');
+    const sound = document.getElementById('notification-sound');
+    bell.addEventListener('click', () => {
+    if (bell.classList.contains('active')) {
+        bell.classList.remove('active');
+        sound.pause();
+        sound.currentTime = 0;
+    } else {
+        bell.classList.add('active');
+        sound.play();
+    }
+});
+});
+}
 
 </script>
-
-</body>
-
-</html>
+{% endblock content %}

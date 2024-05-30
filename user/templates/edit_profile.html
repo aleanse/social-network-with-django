@@ -1,26 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    {% include 'partials/head.html' %}
-</head>
-<body>
-    {% include 'partials/header.html' %}
-    <main class="container__main">
-        <div class="post">
-            <h1>Edit profile</h1>
-            <form class="form-post"  action="{% url 'create_edit_profile' %}" enctype="multipart/form-data" method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                    {{field}}
-                    {% if field.errors %}
-                        {% for error in field.errors %}
-                            <span class="form-errors">{{error}}</span>
-                        {% endfor %}
-                    {% endif %}
-                {% endfor %}
-                <input type="file" name="image">
-                <button class="button-send"  type="submit">Send</button>
-            </form>
-        </div>
-    </main>
+{% block content %}
+<main class="container__main">
+    <div class="post">
+        <h1>Edit profile</h1>
+        <form class="form-post"  action="{% url 'create_edit_profile' %}" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                {{field}}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <span class="form-errors">{{error}}</span>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+            <input type="file" name="image">
+            <button class="button-send"  type="submit">Send</button>
+        </form>
+    </div>
+</main>
+{% endblock content %}

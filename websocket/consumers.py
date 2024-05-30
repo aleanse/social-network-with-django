@@ -33,9 +33,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'sender': sender,
             'receive': receive
         }
-        event = {
+        event = {                   #aqui devemos digitar o nome da função que self.channel_layer.group_send ira
             'type': 'send_message',
-            'message': data,
+            'message': message,
         }
         await self.channel_layer.group_send(self.room_name, event)
 
@@ -55,7 +55,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         get_room_by_name = Room.objects.get(room_name=data['room_name'])
         message_id = data['message_id']
         if not Message.objects.filter(message_id=message_id).exists():
-            message_original = data['message']['message']
+            message_original = data['message']
+            print(message_original)
             message_bytes = message_original.encode('utf-8')
             message_encrypted = f.encrypt((message_bytes))
             message_decoded = message_encrypted.decode('utf-8')

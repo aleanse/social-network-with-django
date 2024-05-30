@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    color: #C4C4C4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Definição de fonte padrão e cor */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #151515;
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll;
+
+}
+
+/* Removendo list-style dos elementos de lista */
+ ul .message-error{
+    color: red;
+    list-style-type: none;
+}
+
+ul .message-sucess{
+    color: green;
+    list-style-type: none;
+}
+
+/* Removendo decoração de link */
+a {
+    text-decoration: none;
+}
+.container__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 16px;
+    
+}
+.container__header nav{
+    display: flex;
+    gap: 10rem;
+}
+.logo{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.container__main{
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+    
+}
+
+.container__register{
+    width: 31.9375rem;
+    height: 30.3125rem;
+    background-color:#232624;
+    padding: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+
+
+
+
+.container__register h1{
+    font-size: 1.7rem;
+    color: #05BE4F;
+}
+
+.form__register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+
+
+.form__register input[type="password"]{
+    font-size: 1.2rem;
+    padding: 8px 25px;
+    background-color: #151515;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+}
+.form__register input[type="text"]{
+    font-size: 1.2rem;
+    padding: 8px 25px;
+    background-color: #151515;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+}
+.form__register input[type="file"]{
+    font-size: 0.9rem;
+    padding: 8px 20px;
+    background-color: #151515;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    width: 17rem;
+}
+
+.form-errors{
+    color: red;
+    
+}
+
+input::placeholder {
+    color: #C4C4C4;
+}
+
+.button-send{
+    padding: 1.0rem;
+    color: #C4C4C4;
+    background-color: #05BE4F;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.25rem;
+    width: 17rem;
+    transition: box-shadow 0.3s; 
+    
+}
+.button-logout{
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+.button-send:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6)
+}
+
+.post{
+    width: 31.9375rem;
+    height: 33rem;
+    border: 2px solid #fffdfd79;
+    border-radius: 8px;
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+    background-color: #232624;
+    background-color: rgba(34, 32, 32, 0.5); /* Cor de fundo com transparência */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra para efeito de profundidade */
+
+}
+
+.post .form-post{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 50vh;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+
+}
+
+.form-post input[type="text"]{
+    width: 400px;
+    height: 30px;
+    background-color: transparent;
+    border-bottom: 1px solid rgb(238, 227, 227);
+    border-right: 0px solid #151515;
+    border-left: 0px solid #151515;
+    border-top: 0px solid #151515;
+    box-shadow: none;
+    outline: none;
+    font-size: 1rem;
+}
+.form-post input[type="password"]{
+    width: 400px;
+    height: 30px;
+    background-color: transparent;
+    border-bottom: 1px solid rgb(238, 227, 227);
+    border-right: 0px solid #151515;
+    border-left: 0px solid #151515;
+    border-top: 0px solid #151515;
+    box-shadow: none;
+    outline: none;
+    font-size: 1rem;
+}
+.form-post input[type="file"] {
+    width: 110px; /* Largura desejada */
+    height: 40px; /* Altura desejada */
+}
+
+
+
+
+
+textarea{
+    resize: none;
+    width: 400px;
+    height: 150px;
+    border-bottom: 1px solid rgb(238, 227, 227);
+    border-right: 0px solid #151515;
+    border-left: 0px solid #151515;
+    border-top: 0px solid #151515;
+    box-shadow: none;
+    outline: none;
+    background-color: transparent;
+}
