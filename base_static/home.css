@@ -1,26 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
-
-
-.home{
-  font-family: "Quicksand", sans-serif;
-  display: flex;
-  justify-content: center;
-  margin-top: 7rem;
-  height: 100vh;
-  overflow-y: scroll;
-}
-
 .container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   max-width: 1200px;
   margin-block: 2rem;
   gap: 2rem;
 }
-
-
 
 
 .card{
@@ -99,7 +85,7 @@
   font-size: 1em;
   color: white;
 }
-.message{
+.message-home{
   font-weight: 400;
   margin-top: 5px;
   color: #777;
