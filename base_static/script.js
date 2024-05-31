@@ -1,4 +1,20 @@
 
+    document.addEventListener('DOMContentLoaded', () => {
+    const bell = document.querySelector('.notification-bell');
+    const sound = document.getElementById('notification-sound');
+    bell.addEventListener('click', () => {
+    if (bell.classList.contains('active')) {
+        bell.classList.remove('active');
+        sound.pause();
+        sound.currentTime = 0;
+    } else {
+        bell.classList.add('active');
+        sound.play();
+    }
+});
+});
+
+
 function likeButton(){
             let heart = document.querySelector('.heart');
             let likes = document.querySelector('.likes');

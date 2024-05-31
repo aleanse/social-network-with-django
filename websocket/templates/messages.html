@@ -55,6 +55,10 @@
    // Determine the WebSocket protocol based on the application's URL
     const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
     const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/{{room_name}}/`;
+    const currentUrl = window.location.pathname;
+    const chatPageUrl = '/a881285e-7197-4c32-812a-1363f035c93a/{{request.user.username}}/';
+    console.log(currentUrl);
+    console.log(chatPageUrl);
 
     // Create a new WebSocket connection
     const socket = new WebSocket(wsEndpoint);
@@ -128,22 +132,7 @@
                 return v.toString(16);
             });
         };
-    function notification(){
-    document.addEventListener('DOMContentLoaded', () => {
-    const bell = document.querySelector('.notification-bell');
-    const sound = document.getElementById('notification-sound');
-    bell.addEventListener('click', () => {
-    if (bell.classList.contains('active')) {
-        bell.classList.remove('active');
-        sound.pause();
-        sound.currentTime = 0;
-    } else {
-        bell.classList.add('active');
-        sound.play();
-    }
-});
-});
-}
+    
 
 </script>
 {% endblock content %}
