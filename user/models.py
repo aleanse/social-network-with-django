@@ -1,14 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
 # Create your models here.
+
+
+
 
 
 class User(AbstractUser):
     def __str__(self):
         return self.username
-    
-    photo = models.ImageField(upload_to='images/photo_profile/',default='images/default.png')
+
+    photo = models.ImageField(upload_to='images/photo_profile/', default='images/default.png')
+    posts_likes = models.ForeignKey('Post', on_delete=models.SET_NULL, null=True, related_name='author_likes')
+
     def contar_seguidores(self):
         return Seguidor.objects.filter(seguindo=self).count()
     
@@ -17,6 +21,7 @@ class Seguidor(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='seguidor')
     seguindo = models.ForeignKey(User, on_delete=models.CASCADE, related_name='seguindo')
     data_seguindo = models.DateTimeField(auto_now_add=True)
+
 
     class Meta:
         unique_together = ('usuario', 'seguindo')
@@ -28,3 +33,12 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='posts')
+
+
+
+
+
+
+
+
+

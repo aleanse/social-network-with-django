@@ -82,13 +82,15 @@ def profile(request):
 
 def users(request):
     user = User.objects.all()
+
+
+
     return render(request,'users.html',context={'user':user})
 
 
 @login_required(login_url='register', redirect_field_name='next')
 def follow(request,id):
     usuario_a_seguir = User.objects.get(id=id)
-    seguido = Seguidor.objects.get_or_create(usuario=request.user, seguindo=usuario_a_seguir)
     return redirect('users')
 
 
@@ -115,6 +117,13 @@ def area_user(request, id):
     user = User.objects.get(id=id)
     seguido = Seguidor.objects.get_or_create(usuario=request.user, seguindo=user)
     return render(request,'area_profile.html',context={'user':user})
+
+def like(request, id):
+    post = User.objects.get(id=id)
+    post.curtidas = post.curtidas + 1
+    return redirect('home')
+
+
 
 
 def home(request):

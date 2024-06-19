@@ -15,7 +15,7 @@
     </div>
     <div class="btns">
         <div class="left">
-            <img src="{{ MEDIA_URL }}heart.png" alt="heart" class="heart" onclick="likeButton()">
+            <a href="{% url 'like' post.id %}"><img src="{{ MEDIA_URL }}heart.png" alt="heart" class="heart"></a>
             <img src="{{ MEDIA_URL }}comment.png" class="comment" alt="comment">
             <img src="{{ MEDIA_URL }}share.png" alt="share">
         </div>
@@ -23,7 +23,9 @@
             <img src="{{ MEDIA_URL }}bookmark.png" alt="bookmark">
         </div>
     </div>
-    <h4 class="likes">5,489 likes</h4>
+    <h4 class="likes">{{ post.curtidas }}</h4>
+
+
     <h4 class="message-home">
         <b>{{ post.title }}</b>
         {{ post.text_post }}

@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 <main class="followers-container">
+
     {% for i in user %}
         {% if i != request.user %}
-            {% include 'partials/user.html' %}
+        {% include 'partials/user.html' %}
         {% endif %}
     {% endfor %}
 </main>
