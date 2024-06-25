@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from user.forms import RegisterForm, LoginForm, PostForm, Edit_profileForm
 from django.contrib.auth import  login, logout
 from user.utils.authenticate import authenticate_by_email
 from django.contrib import messages
-from user.models import User, Seguidor
+from user.models import User, Seguidor, Post,Like
 
 
 # Create your views here.
@@ -119,8 +119,15 @@ def area_user(request, id):
     return render(request,'area_profile.html',context={'user':user})
 
 def like(request, id):
-    post = User.objects.get(id=id)
-    post.curtidas = post.curtidas + 1
+    post = get_object_or_404(Post,id=id)
+    try:
+        like = Like.objects.get(user=request.user, post=post)
+        print("o usuario ja curtiu esse post")
+        return redirect('home')
+    except:
+        like = Like.objects.create(user=request.user, post=post)
+        return redirect('home')
+
     return redirect('home')
 
 
