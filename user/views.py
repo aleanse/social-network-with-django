@@ -26,7 +26,6 @@ def create_register(request):
         return render(request, 'register.html', {'form': form})
     
 def login_view(request):
-    print('ola')
     form = LoginForm()
     return render(request,'login.html',context={'form':form})
 
@@ -122,12 +121,10 @@ def like(request, id):
     post = get_object_or_404(Post,id=id)
     try:
         like = Like.objects.get(user=request.user, post=post)
-        print("o usuario ja curtiu esse post")
         return redirect('home')
     except:
         like = Like.objects.create(user=request.user, post=post)
         return redirect('home')
-
     return redirect('home')
 
 
@@ -135,5 +132,5 @@ def like(request, id):
 
 def home(request):
     users = User.objects.all()
-    return render(request, 'home.html',context={'users':users})
+    return render(request, 'home.html',context={'users': users})
 
