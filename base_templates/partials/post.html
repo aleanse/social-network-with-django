@@ -1,3 +1,5 @@
+{% load custom_tags %}
+{% user_has_liked post request.user as has_liked %}
 <div class="card">
     <div class="top">
         <div class="userDeatils">
@@ -15,7 +17,11 @@
     </div>
     <div class="btns">
         <div class="left">
-            <a href="{% url 'like' post.id %}"><img src="{{ MEDIA_URL }}heart.png" alt="heart" class="heart"></a>
+            {% if has_liked %}
+                <a href="{% url 'like' post.id %}"><img id="heart" src="{{ MEDIA_URL }}heart_red.png" alt="heart" class="heart"></a>
+            {% else %}
+                <a href="{% url 'like' post.id %}"><img id="heart" src="{{ MEDIA_URL }}heart.png" alt="heart" class="heart"></a>
+            {% endif %}
             <img src="{{ MEDIA_URL }}comment.png" class="comment" alt="comment">
             <img src="{{ MEDIA_URL }}share.png" alt="share">
         </div>

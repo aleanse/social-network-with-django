@@ -17,6 +17,8 @@ class User(AbstractUser):
         return Seguidor.objects.filter(seguindo=self).count()
     
 
+    
+
 class Seguidor(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='seguidor')
     seguindo = models.ForeignKey(User, on_delete=models.CASCADE, related_name='seguindo')
@@ -35,6 +37,9 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='posts')
     def total_likes(self):
         return self.likes.count()
+    
+    def user_has_liked(self, user):
+        return self.likes.filter(user=user.id).exists()
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='user_likes')

@@ -117,6 +117,7 @@ def area_user(request, id):
     seguido = Seguidor.objects.get_or_create(usuario=request.user, seguindo=user)
     return render(request,'area_profile.html',context={'user':user})
 
+@login_required(login_url='login', redirect_field_name='next')
 def like(request, id):
     post = get_object_or_404(Post,id=id)
     try:
@@ -125,8 +126,6 @@ def like(request, id):
     except:
         like = Like.objects.create(user=request.user, post=post)
         return redirect('home')
-    return redirect('home')
-
 
 
 
