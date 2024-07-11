@@ -77,8 +77,6 @@ def profile(request):
     return render(request, 'profile.html',context={'user':user})
 
 
-
-
 def users(request):
     user = User.objects.all()
 
@@ -90,6 +88,7 @@ def users(request):
 @login_required(login_url='register', redirect_field_name='next')
 def follow(request,id):
     usuario_a_seguir = User.objects.get(id=id)
+    seguido = Seguidor.objects.get_or_create(usuario=request.user, seguindo=usuario_a_seguir)
     return redirect('users')
 
 
@@ -120,13 +119,16 @@ def area_user(request, id):
 @login_required(login_url='login', redirect_field_name='next')
 def like(request, id):
     post = get_object_or_404(Post,id=id)
-    try:
-        like = Like.objects.get(user=request.user, post=post)
-        return redirect('home')
-    except:
-        like = Like.objects.create(user=request.user, post=post)
-        return redirect('home')
-
+    like = Like.objects.create(user=request.user, post=post)
+    return redirect('home')
+    
+@login_required(login_url='login', redirect_field_name='next')
+def deslike(request, id):
+    post = get_object_or_404(Post,id=id)
+    like = Like.objects.get(user=request.user, post=post)
+    like.delete()
+    
+    return redirect('home')    
 
 
 def home(request):

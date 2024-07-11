@@ -12,6 +12,8 @@ class User(AbstractUser):
 
     photo = models.ImageField(upload_to='images/photo_profile/', default='images/default.png')
     posts_likes = models.ForeignKey('Post', on_delete=models.SET_NULL, null=True, related_name='author_likes')
+    def is_following(self, user):
+        return Seguidor.objects.filter(usuario=self, seguindo=user).exists()
 
     def contar_seguidores(self):
         return Seguidor.objects.filter(seguindo=self).count()
@@ -40,6 +42,7 @@ class Post(models.Model):
     
     def user_has_liked(self, user):
         return self.likes.filter(user=user.id).exists()
+    
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='user_likes')

@@ -18,7 +18,7 @@
     <div class="btns">
         <div class="left">
             {% if has_liked %}
-                <a href="{% url 'like' post.id %}"><img id="heart" src="{{ MEDIA_URL }}heart_red.png" alt="heart" class="heart"></a>
+                <a href="{% url 'deslike' post.id %}"><img id="heart" src="{{ MEDIA_URL }}heart_red.png" alt="heart" class="heart"></a>
             {% else %}
                 <a href="{% url 'like' post.id %}"><img id="heart" src="{{ MEDIA_URL }}heart.png" alt="heart" class="heart"></a>
             {% endif %}
