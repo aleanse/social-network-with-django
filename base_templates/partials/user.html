@@ -24,7 +24,7 @@
             <path d="M16 19h6" />
             <path d="M19 16v6" />
             <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
-            </svg><a href="{% url 'follow' i.id %}">Deixar de seguir</a>
+            </svg><a href="{% url 'unfollow' i.id %}">Deixar de seguir</a>
             </button>
             {% else %}
               <button class="follow-btn"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="25"

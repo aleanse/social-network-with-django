@@ -56,7 +56,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message_id = data['message_id']
         if not Message.objects.filter(message_id=message_id).exists():
             message_original = data['message']
-            print(message_original)
             message_bytes = message_original.encode('utf-8')
             message_encrypted = f.encrypt((message_bytes))
             message_decoded = message_encrypted.decode('utf-8')

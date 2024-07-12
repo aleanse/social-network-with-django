@@ -93,6 +93,14 @@ def follow(request,id):
 
 
 @login_required(login_url='register', redirect_field_name='next')
+def unfollow(request,id):
+    usuario_a_seguir = User.objects.get(id=id)
+    seguido = Seguidor.objects.get(usuario=request.user, seguindo=usuario_a_seguir)
+    if seguido:
+        seguido.delete()    
+    return redirect('users')
+
+@login_required(login_url='register', redirect_field_name='next')
 def edit_profile(request):
     form = Edit_profileForm()
     return render(request,'edit_profile.html',context={'form':form})

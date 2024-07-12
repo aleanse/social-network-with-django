@@ -2,7 +2,6 @@
 {% load custom_tags %}
 {% block content %}
 <main class="followers-container">
-
     {% for i in user %}
         {% if i != request.user %}
         {% include 'partials/user.html' %}
