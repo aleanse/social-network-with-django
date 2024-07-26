@@ -29,9 +29,9 @@ ENCRYPT_KEY = b'xLwj4srh_SzXdrDHAMwL4BLTkPo6V4savYP9xHX5YS0='
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["social-network-with-django.onrender.com"]
 
 
 # Application definition
@@ -96,8 +96,7 @@ DATABASES = {
     }
 }
 
-#DATABASES["default"] = dj_database_url.parse("postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg
-# -cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
+DATABASES["default"] = dj_database_url.parse("postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg-cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
 
 
 # Password validation
