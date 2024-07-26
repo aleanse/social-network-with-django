@@ -56,6 +56,7 @@
     const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
     var room_name = "{{ room_name }}";
     const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/${room_name}/`;
+    console.log(room_name);
     console.log(wsEndpoint);
     const currentUrl = window.location.pathname;
     const chatPageUrl = '/a881285e-7197-4c32-812a-1363f035c93a/{{request.user.username}}/';
