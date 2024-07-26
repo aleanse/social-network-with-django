@@ -29,9 +29,9 @@ ENCRYPT_KEY = b'xLwj4srh_SzXdrDHAMwL4BLTkPo6V4savYP9xHX5YS0='
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [".vercel.app"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -96,7 +96,8 @@ DATABASES = {
     }
 }
 
-DATABASES["default"] = dj_database_url.parse("postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg-cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
+#DATABASES["default"] = dj_database_url.parse("postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg
+# -cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
 
 
 # Password validation
@@ -137,8 +138,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "base_static"),
+    os.path.join(BASE_DIR, "static"),
+
 
 ]
 
