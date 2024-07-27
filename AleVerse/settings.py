@@ -29,9 +29,9 @@ ENCRYPT_KEY = b'xLwj4srh_SzXdrDHAMwL4BLTkPo6V4savYP9xHX5YS0='
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['social-network-with-django.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -84,12 +84,7 @@ ASGI_APPLICATION = "AleVerse.asgi.application"
 
 if DEBUG:
     CHANNEL_LAYERS = {
-        "default": {
-            "BACKEND": "channels_redis.core.RedisChannelLayer",
-            "CONFIG": {
-                "hosts": [("127.0.0.1", 6379)],
-            },
-        },
+        "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"},
     }
 else:
     CHANNEL_LAYERS = {
