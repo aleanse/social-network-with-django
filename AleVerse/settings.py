@@ -29,9 +29,9 @@ ENCRYPT_KEY = b'xLwj4srh_SzXdrDHAMwL4BLTkPo6V4savYP9xHX5YS0='
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".vercel.app"]
 
 
 # Application definition
