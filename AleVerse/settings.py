@@ -31,13 +31,14 @@ ENCRYPT_KEY = b'xLwj4srh_SzXdrDHAMwL4BLTkPo6V4savYP9xHX5YS0='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [".vercel.app"]
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'websocket',
-    'channels',
     'user',
 
 ]
@@ -81,9 +81,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'AleVerse.wsgi.application'
 ASGI_APPLICATION = "AleVerse.asgi.application"
-CHANNEL_LAYERS = {
-    "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"},
-}
+
+if DEBUG:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [('localhost', 6379)],
+            },
+        },
+    }
+else:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {
+                "hosts": [("redis-13326.c308.sa-east-1-1.ec2.redns.redis-cloud.com",13326)],
+                "password": "ppgXp7DMsVPVJocAHbeXgZRWeEIUbnvz",
+            },
+        },
+    }
+
+
 
 
 # Database

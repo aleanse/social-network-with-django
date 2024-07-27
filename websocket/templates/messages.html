@@ -53,7 +53,7 @@
     }
 
    // Determine the WebSocket protocol based on the application's URL
-    const websocketProtocol = window.location.protocol === "https:" ? "ws" : "wss";
+    const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
     var room_name = "{{ room_name }}";
     const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/${room_name}/`;
     console.log(room_name);

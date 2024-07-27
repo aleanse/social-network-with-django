@@ -16,11 +16,20 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'AleVerse.settings')
 
 
 
-
-
 application = ProtocolTypeRouter({
-    "http":get_asgi_application(),
-    "websocket": AuthMiddlewareStack(URLRouter(
-        routing.websocket_urlpatterns
-    ))
+    "http": get_asgi_application(),
+    "websocket": AllowedHostsOriginValidator(
+        AuthMiddlewareStack(
+            URLRouter(
+                routing.websocket_urlpatterns  # Substitua 'routing.websocket_urlpatterns' com o seu roteamento de WebSocket
+            )
+        )
+    ),
 })
+
+#application = ProtocolTypeRouter({
+ #   "http":get_asgi_application(),
+  #  "websocket": AuthMiddlewareStack(URLRouter(
+   #     routing.websocket_urlpatterns
+   # ))
+#})
