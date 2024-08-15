@@ -37,7 +37,7 @@ ENCRYPT_KEY =  env.str('ENCRYPT_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['dpg-cqhg49o8fa8c73brs2ag-a.onrender.com']
+ALLOWED_HOSTS = ['social-network-with-django.onrender.com']
 
 
 # Application definition
