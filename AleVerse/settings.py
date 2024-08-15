@@ -35,9 +35,9 @@ ENCRYPT_KEY =  env.str('ENCRYPT_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['dpg-cqhg49o8fa8c73brs2ag-a.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -108,25 +108,20 @@ CHANNEL_LAYERS = {
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+if  DEBUG:
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env.str('NAME'),  # Nome do banco de dados
-        'USER': env.str('USER'),  # Nome do usuário do banco de dados
-        'PASSWORD': env.str('PASSWORD'),  # Senha do usuário do banco de dados
-        'HOST': env.str('HOST'),  # Endereço do servidor de banco de dados
-        'PORT': env.str('PORT'),  # Porta do servidor de banco de dados
-    }
-}
+else:
+    DATABASES = {}
+    DATABASES["default"] = dj_database_url.parse(
+        "postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg-cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
 
-DATABASES["default"] = dj_database_url.parse("postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg-cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
+
 
 
 # Password validation
