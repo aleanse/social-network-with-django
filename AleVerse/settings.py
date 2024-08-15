@@ -189,9 +189,3 @@ MESSAGE_TAGS = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "https://social-network-with-django.vercel.app",
-    "https://localhost:8080",
-]
-
-CORS_ALLOW_CREDENTIALS = True
