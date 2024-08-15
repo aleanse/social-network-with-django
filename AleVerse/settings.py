@@ -37,7 +37,7 @@ ENCRYPT_KEY =  env.str('ENCRYPT_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['social-network-with-django.onrender.com']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
