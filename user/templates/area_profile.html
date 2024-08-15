@@ -1,40 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-
-{% include 'partials/head.html' %}
-
-<body>
-    {% include 'partials/header.html' %}
-    {% include 'partials/messages.html' %}
-    <main class="container__users">
-        <div class="card-container">
-            <img class="round" src="{{ user.photo.url }}" alt="user" />
-            <h3>{{ user.username }}</h3>
-            <div class="buttons">
-                <button class="primary ghost">
-                    <a class="link-seguir" href="{% url 'area_user' user.id %}">Seguir</a>
-                </button>
-                <button class="primary ghost">
-                    {{ user.contar_seguidores }} Seguidores
-                </button>
-                
-            </div>
-            <button class="primary">
-                Message
-            </button>
-            <div class="skills">
-            </div>
-        </div>
-    </main>
-    <div class="posts_user">
-        {% for post in user.posts.all %}
-             
-            {% include 'partials/post.html' %}
-              
-        {% endfor %}
-    </div>
-    
-    
-</body>
-</html>
+{% extends 'base.html' %}
+{% load custom_tags %}
+{% block content %}
+<main class="followers-container">
+    {% include 'partials/user.html' %}
+</main>
+{% endblock content %}

@@ -11,8 +11,14 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from environs import Env
 import os
+
 import dj_database_url
+
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,14 +30,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lgiz!hz-=kc5e#!-c*xwf7zp!#y0i1&j7)t%4b29lkdn1$wysy'
-ENCRYPT_KEY = b'xLwj4srh_SzXdrDHAMwL4BLTkPo6V4savYP9xHX5YS0='
+SECRET_KEY = env.str('SECRET_KEY')
+ENCRYPT_KEY =  env.str('ENCRYPT_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dpg-cqhg49o8fa8c73brs2ag-a.onrender.com']
 
 
 # Application definition
@@ -82,20 +88,20 @@ TEMPLATES = [
 WSGI_APPLICATION = 'AleVerse.wsgi.application'
 ASGI_APPLICATION = "AleVerse.asgi.application"
 
-if DEBUG:
-    CHANNEL_LAYERS = {
-        "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"},
-    }
-else:
-    CHANNEL_LAYERS = {
-        "default": {
-            "BACKEND": "channels_redis.core.RedisChannelLayer",
-            "CONFIG": {
-                "hosts": [("redis-13326.c308.sa-east-1-1.ec2.redns.redis-cloud.com",13326)],
-                "password": "ppgXp7DMsVPVJocAHbeXgZRWeEIUbnvz",
-            },
-        },
-    }
+#if DEBUG:
+CHANNEL_LAYERS = {
+    "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"},
+}
+#else:
+ #   CHANNEL_LAYERS = {
+  #      "default": {
+   #         "BACKEND": "channels_redis.core.RedisChannelLayer",
+   #         "CONFIG": {
+    #            "hosts": [("redis-13326.c308.sa-east-1-1.ec2.redns.redis-cloud.com",13326)],
+     #           "password": "ppgXp7DMsVPVJocAHbeXgZRWeEIUbnvz",
+      #      },
+      #  },
+   # }
 
 
 
@@ -107,6 +113,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env.str('NAME'),  # Nome do banco de dados
+        'USER': env.str('USER'),  # Nome do usuário do banco de dados
+        'PASSWORD': env.str('PASSWORD'),  # Senha do usuário do banco de dados
+        'HOST': env.str('HOST'),  # Endereço do servidor de banco de dados
+        'PORT': env.str('PORT'),  # Porta do servidor de banco de dados
     }
 }
 
@@ -154,13 +170,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "base_static"),
     os.path.join(BASE_DIR, "static"),
 
-
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -168,8 +182,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MESSAGE_TAGS = {
     messages.ERROR: "message-error",
     messages.SUCCESS:'message-sucess',
-
-
+    messages.INFO:'message-info'
 }
 
 

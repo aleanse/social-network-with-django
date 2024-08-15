@@ -1,5 +1,4 @@
 <div class="nav-container">
-    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
     <div class="nav-links" id="navLinks">
         <a href="{% url 'home' %}" class="nav-link">Home</a>
       {% if request.user.is_authenticated %}

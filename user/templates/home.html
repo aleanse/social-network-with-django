@@ -2,10 +2,9 @@
 {% load custom_tags %}
 {% block content %}
       <div class="container">
-        {% for user in users %}
-            {% for post in user.posts.all %}
+            {% for post in posts %}
                   {% include 'partials/post.html'  with post=post %}
             {% endfor %}
-        {% endfor %}
+
       </div>
 {% endblock content %}

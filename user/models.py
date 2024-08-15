@@ -44,6 +44,13 @@ class Post(models.Model):
         return self.likes.filter(user=user.id).exists()
     
 
+class Comment(models.Model):
+    text = models.TextField(max_length=200)
+    author = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,null=True,related_name='comments')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='user_likes')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')

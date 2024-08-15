@@ -1,5 +1,5 @@
 from django.contrib import admin
-from user.models import User, Post, Seguidor
+from user.models import User, Post, Seguidor, Comment
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -17,3 +17,4 @@ class UserAdmin(UserAdmin):
 admin.site.register(User,UserAdmin)
 admin.site.register(Post,PostAdmin)
 admin.site.register(Seguidor)
+admin.site.register(Comment)

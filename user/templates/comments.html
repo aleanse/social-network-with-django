@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% for comment in comments %}
+   <div class="comment-box">
+        <div class="box-top">
+            <div class="Profile">
+                <div class="profile-image">
+                    <img src="{{ comment.author.photo.url }}">
+                </div>
+                <div class="Name">
+                    <strong>{{ comment.author }}</strong>
+                </div>
+            </div>
+             <p>
+                {{ comment.text }}
+            </p>
+        </div>
+    </div>
+    {% empty %}
+        <h1>no comments</h1>
+{% endfor %}
+
+{% endblock content %}

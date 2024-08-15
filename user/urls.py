@@ -22,7 +22,9 @@ urlpatterns = [
     path('create_edit_profile/',views.create_edit_profile,name='create_edit_profile'),
     path('user/<int:id>',views.area_user,name='area_user'),
     path('like/<int:id>',views.like,name='like'),
-    path('deslike/<int:id>',views.deslike,name='deslike')
+    path('deslike/<int:id>',views.deslike,name='deslike'),
+    path('make_comment/<int:id>',views.make_comment,name='make_comment'),
+    path('comment/<int:id>',views.comment,name='comment')
 
 
 ]

@@ -1,10 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.deprecation import MiddlewareMixin
+
 from user.forms import RegisterForm, LoginForm, PostForm, Edit_profileForm
 from django.contrib.auth import  login, logout
 from user.utils.authenticate import authenticate_by_email
 from django.contrib import messages
-from user.models import User, Seguidor, Post,Like
+from user.models import User, Seguidor, Post,Like, Comment
 
 
 # Create your views here.
@@ -26,6 +28,9 @@ def create_register(request):
         return render(request, 'register.html', {'form': form})
     
 def login_view(request):
+    next_url = request.GET.get('next')
+    if next_url:
+        messages.info(request, 'Você precisa realizar login antes de realizar essa ação.')
     form = LoginForm()
     return render(request,'login.html',context={'form':form})
 
@@ -73,14 +78,11 @@ def logout_view(request):
 
 def profile(request):
     user = request.user
-    
     return render(request, 'profile.html',context={'user':user})
 
 
 def users(request):
     user = User.objects.all()
-
-
 
     return render(request,'users.html',context={'user':user})
 
@@ -122,7 +124,7 @@ def create_edit_profile(request):
 def area_user(request, id):
     user = User.objects.get(id=id)
     seguido = Seguidor.objects.get_or_create(usuario=request.user, seguindo=user)
-    return render(request,'area_profile.html',context={'user':user})
+    return render(request,'area_profile.html',context={'i':user})
 
 @login_required(login_url='login', redirect_field_name='next')
 def like(request, id):
@@ -140,6 +142,26 @@ def deslike(request, id):
 
 
 def home(request):
-    users = User.objects.all()
-    return render(request, 'home.html',context={'users': users})
+    posts = Post.objects.all().order_by('-created_at')
+
+    return render(request, 'home.html',context={'posts': posts })
+
+
+@login_required(login_url='login', redirect_field_name='next')
+def make_comment(request, id):
+    if request.method == 'POST':
+        post = Post.objects.get(id=id)
+        text = request.POST.get('user_input')
+        if text:
+            comment = Comment.objects.create(text=text,author= request.user,post=post)
+            comments = post.comments.all()
+            return redirect('home')
+    return redirect('home')
+
+@login_required(login_url='login', redirect_field_name='next')
+def comment(request, id):
+    post = Post.objects.get(id=id)
+    comments = post.comments.all().order_by('-created_at')
+    return render(request, 'comments.html',context={'comments':comments})
+
 

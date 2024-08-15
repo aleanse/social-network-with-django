@@ -18,16 +18,13 @@
     <div class="btns">
         <div class="left">
             {% if has_liked %}
-                <a href="{% url 'deslike' post.id %}"><img id="heart" src="{{ MEDIA_URL }}heart_red.png" alt="heart" class="heart"></a>
+                <a href="{% url 'deslike' post.id %}"><img  src="{{ MEDIA_URL }}heart_red.png" alt="heart" class="heart"></a>
             {% else %}
-                <a href="{% url 'like' post.id %}"><img id="heart" src="{{ MEDIA_URL }}heart.png" alt="heart" class="heart"></a>
+                <a href="{% url 'like' post.id %}"><img  src="{{ MEDIA_URL }}heart.png" alt="heart" class="heart"></a>
             {% endif %}
-            <img src="{{ MEDIA_URL }}comment.png" class="comment" alt="comment">
-            <img src="{{ MEDIA_URL }}share.png" alt="share">
+            <a href="{% url 'comment' post.id %}" ><img src="{{ MEDIA_URL }}comment.png" class="comment" alt="comment"></a>
         </div>
-        <div class="right">
-            <img src="{{ MEDIA_URL }}bookmark.png" alt="bookmark">
-        </div>
+
     </div>
     <h4 class="likes">{{ post.total_likes }}</h4>
 
@@ -37,12 +34,16 @@
         {{ post.text_post }}
         
     </h4>
-    <h4 class="comments">View all 546 comments</h4>
+   <a href="{% url 'comment' post.id %}"><h4 class="comments">View all {{ post.comments.count }} comments</h4></a>
     <div class="addComments">
         <div class="userImg">
             <img src="{{ post.author.photo.url }}" alt="user" class="cover">
         </div>
-        <input type="text" class="text" placeholder="Add a comment...">
+        <form method="post" action="{% url 'make_comment' post.id %}">
+            {% csrf_token %}
+             <input type="text" name="user_input" class="make_comment" placeholder="Add a comment..."
+                    onkeydown="if(event.key === 'Enter'){this.form.submit();}">
+        </form>
     </div>
     <h5 class="postTime">{{ post.created_at }}</h5>
 </div>
