@@ -8,6 +8,7 @@ from cryptography.fernet import Fernet
 from django.conf import settings
 
 
+
 def CreateRoom(request, id_receiver):
     user = request.user
     receiver = User.objects.get(id=id_receiver)  # pega o usuario destinatario
