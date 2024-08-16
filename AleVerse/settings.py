@@ -37,7 +37,7 @@ ENCRYPT_KEY =  env.str('ENCRYPT_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app','localhost','127.0.0.1']
 
 
 # Application definition
@@ -88,21 +88,34 @@ TEMPLATES = [
 WSGI_APPLICATION = 'AleVerse.wsgi.application'
 ASGI_APPLICATION = "AleVerse.asgi.application"
 
-#if DEBUG:
-CHANNEL_LAYERS = {
-    "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"},
-}
-#else:
- #   CHANNEL_LAYERS = {
-  #      "default": {
-   #         "BACKEND": "channels_redis.core.RedisChannelLayer",
-   #         "CONFIG": {
-    #            "hosts": [("redis-13326.c308.sa-east-1-1.ec2.redns.redis-cloud.com",13326)],
-     #           "password": "ppgXp7DMsVPVJocAHbeXgZRWeEIUbnvz",
-      #      },
-      #  },
-   # }
 
+#CHANNEL_LAYERS = {
+ #           "default": {
+ #               "BACKEND": "channels.layers.InMemoryChannelLayer"
+  #          },
+#}
+
+
+# settings.py
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [
+                "redis://:WApnu5SkT949raGY39YkXXAsXQCeZxVA@redis-11677.c308.sa-east-1-1.ec2.redns.redis-cloud.com:11677"
+            ],
+        },
+    },
+}
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://:WApnu5SkT949raGY39YkXXAsXQCeZxVA@redis-11677.c308.sa-east-1-1.ec2.redns.redis-cloud.com:11677/1',
+    }
+}
 
 
 
