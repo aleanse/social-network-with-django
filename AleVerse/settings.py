@@ -11,14 +11,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from pathlib import Path
 from django.contrib.messages import constants as messages
-from environs import Env
+from dotenv import load_dotenv
 import os
+import psycopg2
 
 import dj_database_url
 
-
-env = Env()
-env.read_env()
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY')
-ENCRYPT_KEY =  env.str('ENCRYPT_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
+ENCRYPT_KEY =  os.getenv('ENCRYPT_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -89,50 +88,40 @@ WSGI_APPLICATION = 'AleVerse.wsgi.application'
 ASGI_APPLICATION = "AleVerse.asgi.application"
 
 
-#CHANNEL_LAYERS = {
- #           "default": {
- #               "BACKEND": "channels.layers.InMemoryChannelLayer"
-  #          },
-#}
-
-
-# settings.py
-
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [
-                "redis://:WApnu5SkT949raGY39YkXXAsXQCeZxVA@redis-11677.c308.sa-east-1-1.ec2.redns.redis-cloud.com:11677"
-            ],
-        },
-    },
+            "default": {
+                "BACKEND": "channels.layers.InMemoryChannelLayer"
+            },
 }
 
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://:WApnu5SkT949raGY39YkXXAsXQCeZxVA@redis-11677.c308.sa-east-1-1.ec2.redns.redis-cloud.com:11677/1',
-    }
-}
+
+
+
+
+
+
 
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-if  DEBUG:
 
+if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
 else:
     DATABASES = {}
-    DATABASES["default"] = dj_database_url.parse(
-        "postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg-cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
+    DATABASES["default"] = dj_database_url.parse("postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg-cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
+
+
+
+
 
 
 
