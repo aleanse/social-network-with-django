@@ -1,10 +1,18 @@
 # Social Network with Django
 
-![Project Logo](path/to/your/logo.png)
 
-## Overview
+
+## Sobre o projeto
 
 Esta é uma rede social desenvolvida com Django e Django Channels, onde os usuários podem criar perfis, enviar mensagens em tempo real para outros usuários, compartilhar posts, comentar, curtir, e seguir outros usuários. A aplicação foi projetada para ser escalável e segura, utilizando as melhores práticas de desenvolvimento web.
+
+## Layout
+### Registro
+![](assets/register.png)
+### Usuarios
+![](assets/users.png)
+### chat
+![](assets/chat.png)
 
 ## Features
 
@@ -168,7 +176,7 @@ Ao receber uma mensagem, ela é descriptografada utilizando a mesma chave, garan
 ```
 
 ### Segurança
-Implementamos práticas de segurança como criptografia de dados, proteção contra CSRF, e validações rigorosas de entradas para evitar injeção de SQL e XSS.
+Implementei tambem  práticas de segurança como criptografia de dados, proteção contra CSRF, e validações rigorosas de entradas para evitar injeção de SQL e XSS.
 
 
 ## Tecnologias usadas
@@ -176,11 +184,11 @@ Implementamos práticas de segurança como criptografia de dados, proteção con
 ### Backend
 - **Django:** Framework principal usado para construir a aplicação, aproveitando sua robustez e flexibilidade.
 - **Django Channels:** Extensão de Django para suportar WebSockets, essencial para as mensagens em tempo real.
-- **PostgreSQL:** Banco de dados relacional escolhido por sua confiabilidade e desempenho em produção.
+- **PostgreSQL**
 
 ### Frontend
-- **HTML5 e CSS3:**.
-- **JavaScript (ES6+):** Para manipulação dinâmica do DOM e comunicação assíncrona com o backend.
+- **HTML e CSS**
+- **JavaScript :** Para manipulação dinâmica do DOM e comunicação assíncrona com o backend.
 - **WebSockets:** Integrados com Django Channels para fornecer uma experiência em tempo real.
 
 
