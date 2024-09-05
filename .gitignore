@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-static/admin/
+static/
 # Distribution / packaging
 .Python
 build/
