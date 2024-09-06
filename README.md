@@ -34,7 +34,7 @@ Os usuários podem comentar em qualquer post,os comentários são exibidos em or
 A funcionalidade de mensagens em tempo real é o principal destaque desta rede social. Implementada para oferecer uma experiência de comunicação instantânea e fluida entre os usuários, a solução foi construída utilizando Django Channels e  WebSockets. Essa integração permite que os usuários troquem mensagens de forma síncrona, sem necessidade de recarregar a página.
 ### implementação do chat em tempo real
 Um ChatConsumer foi criado para gerenciar a comunicação via WebSocket. O ChatConsumer lida com o envio e recebimento de mensagens em tempo real.Alem de salvar no banco de dados as mensagens
-```
+```python
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = f"room_{self.scope['url_route']['kwargs']['room_name']}"
@@ -93,7 +93,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 ### Gerenciamento de WebSockets
 O cliente WebSocket é gerenciado em JavaScript. Ele lida com a conexão WebSocket, envio e recebimento de mensagens e atualização da interface do usuário.
-```
+```javascript
 const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
 var room_name = "{{ room_name }}";
 const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notification/${room_name}/`;
@@ -154,7 +154,7 @@ Para garantir a privacidade e a segurança das comunicações entre os usuários
 ### Criptografia com Fernet
 O Fernet é uma implementação de criptografia simétrica que usa uma chave para cifrar e decifrar dados. Cada mensagem é convertida em bytes, criptografada e então armazenada de forma segura.
 Ao receber uma mensagem, ela é descriptografada utilizando a mesma chave, garantindo que apenas os destinatários autorizados possam ler o conteúdo da mensagem.
-```
+```python
   message_bytes = message_original.encode('utf-8')
   message_encrypted = f.encrypt(message_bytes)
   message_decoded = message_encrypted.decode('utf-8')
