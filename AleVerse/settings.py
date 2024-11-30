@@ -15,6 +15,7 @@ from cryptography.fernet import Fernet
 from django.contrib.messages import constants as messages
 from dotenv import load_dotenv
 import os
+import psycopg2
 
 import dj_database_url
 
@@ -31,7 +32,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
+
 ENCRYPT_KEY = os.getenv('ENCRYPT_KEY').encode('utf-8')
+
+
+
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -89,38 +94,41 @@ WSGI_APPLICATION = 'AleVerse.wsgi.application'
 ASGI_APPLICATION = "AleVerse.asgi.application"
 
 
-#CHANNEL_LAYERS = {
- #           "default": {
- #               "BACKEND": "channels.layers.InMemoryChannelLayer"
-  #          },
-#}
-
-
-# settings.py
-
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
-    },
+        "default": {
+            "BACKEND": "channels.layers.InMemoryChannelLayer"
+        },
 }
+
+
+
+
+
+
+
+
 
 
 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-if  DEBUG:
 
+if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
 else:
     DATABASES = {}
-    DATABASES["default"] = dj_database_url.parse(
-        "postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg-cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
+    DATABASES["default"] = dj_database_url.parse("postgresql://social_network_django_database_oa1v_user:2tkJUNjiAfbirdoPMIjEPyi0NKNKmvs4@dpg-cqhg49o8fa8c73brs2ag-a.oregon-postgres.render.com/social_network_django_database_oa1v")
+
+
+
+
 
 
 
