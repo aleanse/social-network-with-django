@@ -10,15 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from pathlib import Path
+
+from cryptography.fernet import Fernet
 from django.contrib.messages import constants as messages
-from environs import Env
+from dotenv import load_dotenv
 import os
 
 import dj_database_url
 
 
-env = Env()
-env.read_env()
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,14 +29,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY')
-ENCRYPT_KEY =  env.str('ENCRYPT_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
+ENCRYPT_KEY = os.getenv('ENCRYPT_KEY').encode('utf-8')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app','localhost','127.0.0.1','.onrender.com']
 
@@ -100,22 +100,10 @@ ASGI_APPLICATION = "AleVerse.asgi.application"
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [
-                "redis://:WApnu5SkT949raGY39YkXXAsXQCeZxVA@redis-11677.c308.sa-east-1-1.ec2.redns.redis-cloud.com:11677"
-            ],
-        },
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }
 
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://:WApnu5SkT949raGY39YkXXAsXQCeZxVA@redis-11677.c308.sa-east-1-1.ec2.redns.redis-cloud.com:11677/1',
-    }
-}
 
 
 

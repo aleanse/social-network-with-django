@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from user.models import User
@@ -8,12 +9,11 @@ from cryptography.fernet import Fernet
 from django.conf import settings
 
 
-
+@login_required(login_url='login', redirect_field_name='next')
 def CreateRoom(request, id_receiver):
     user = request.user
     receiver = User.objects.get(id=id_receiver)  # pega o usuario destinatario
     try:
-
         get_room = Room.objects.filter(users=user).filter(
             users=receiver).distinct().first()  # tenta pegar a sala onde onde estão ligados o destinatario e remetente
         if get_room == None:
@@ -25,7 +25,7 @@ def CreateRoom(request, id_receiver):
         room.users.add(user, receiver)
         return redirect('message', room_name=str(room.room_name), username=user.username)
 
-
+@login_required(login_url='login', redirect_field_name='next')
 def MessageView(request, room_name, username):
     get_room = Room.objects.get(room_name=room_name)
     get_messages = Message.objects.filter(room=get_room)
